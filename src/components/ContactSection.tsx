@@ -2,19 +2,26 @@
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export const ContactSection = () => {
+  const { toast } = useToast();
+
   const handleWhatsAppClick = () => {
     const message = "Olá, estou interessado em produtos Apple da FortalSolutions. Poderia me ajudar?";
-    const whatsappLink = `https://wa.me/558491234567?text=${encodeURIComponent(message)}`;
+    const whatsappLink = `https://wa.me/5585997131313?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Form submission logic would go here
-    alert("Mensagem enviada! Entraremos em contato em breve.");
+    toast({
+      title: "Mensagem enviada!",
+      description: "Entraremos em contato em breve.",
+      duration: 4000,
+    });
+    (e.target as HTMLFormElement).reset();
   };
 
   return (
@@ -37,19 +44,19 @@ export const ContactSection = () => {
                   <label htmlFor="name" className="block text-sm font-medium mb-1">
                     Nome completo
                   </label>
-                  <Input id="name" placeholder="Seu nome" required />
+                  <Input id="name" name="name" placeholder="Seu nome" required />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-1">
                     E-mail
                   </label>
-                  <Input id="email" type="email" placeholder="seu@email.com" required />
+                  <Input id="email" name="email" type="email" placeholder="seu@email.com" required />
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium mb-1">
                     Telefone
                   </label>
-                  <Input id="phone" placeholder="(84) 9XXXX-XXXX" />
+                  <Input id="phone" name="phone" placeholder="(85) 99713-1313" />
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-1">
@@ -57,6 +64,7 @@ export const ContactSection = () => {
                   </label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder="Como podemos ajudar?"
                     className="min-h-[120px]"
                     required
@@ -86,25 +94,22 @@ export const ContactSection = () => {
                   <Phone className="w-6 h-6 text-apple-blue mt-0.5" />
                   <div>
                     <p className="font-medium">Telefone</p>
-                    <a href="tel:+5584912345678" className="text-apple-blue hover:underline">
-                      +55 84 9XXXX-XXXX
+                    <a href="tel:+5585997131313" className="text-apple-blue hover:underline">
+                      +55 85 99713-1313
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <MapPin className="w-6 h-6 text-apple-blue mt-0.5" />
+                  <svg className="w-6 h-6 text-apple-blue mt-0.5" viewBox="0 0 24 24" fill="none"><path d="M20 10v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/><path d="M9 21h6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/><path d="M9 3h6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/><rect x="3" y="3" width="18" height="7" rx="2" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/></svg>
                   <div>
-                    <p className="font-medium">Endereço</p>
+                    <p className="font-medium">Entregas</p>
                     <p className="text-gray-600">
-                      Av. Exemplo, 123 - Fortaleza, CE
-                      <br />
-                      CEP: 60000-000
+                      Entregas em Orlando e Miami diretamente no seu hotel, Airbnb etc, sem custos e com atendimento em português
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-
             <div className="bg-white p-8 rounded-2xl shadow-md text-center">
               <h3 className="text-2xl font-semibold mb-4">Atendimento pelo WhatsApp</h3>
               <p className="text-gray-700 mb-6">

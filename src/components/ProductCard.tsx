@@ -12,7 +12,7 @@ interface ProductCardProps {
 export const ProductCard = ({ name, price, image, category }: ProductCardProps) => {
   const handleBuyClick = () => {
     const message = `Olá, estou interessado(a) no produto: ${name} por $${price}. Gostaria de mais informações para realizar a compra.`;
-    const whatsappLink = `https://wa.me/558491234567?text=${encodeURIComponent(message)}`;
+    const whatsappLink = `https://wa.me/5585997131313?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };
 
@@ -35,10 +35,10 @@ export const ProductCard = ({ name, price, image, category }: ProductCardProps) 
         <div className="mt-4">
           <Button
             onClick={handleBuyClick}
-            className="w-full bg-apple-blue hover:bg-apple-blue-dark gap-2"
+            className="w-full bg-apple-blue hover:bg-apple-blue-dark gap-2 rounded-lg py-3 font-semibold text-base text-white shadow-md transition-all"
           >
             <ShoppingCart className="h-4 w-4" />
-            Comprar
+            Comprar no WhatsApp
           </Button>
         </div>
       </div>

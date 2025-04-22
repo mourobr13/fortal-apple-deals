@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Badge } from "./ui/badge";
-import { ArrowRight, Check, DollarSign, Shield, Truck } from "lucide-react";
+import { ArrowRight, Check, DollarSign, Shield, Truck, Watch } from "lucide-react";
 
 interface FeatureProps {
   icon: React.ReactNode;
@@ -30,10 +30,10 @@ export const FeaturesSection = () => {
             Por que escolher a FortalSolutions?
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Produtos Apple com preços oficiais e atendimento premium
+            Produtos Apple com preços oficiais e o menor valor do mercado
           </h2>
           <p className="text-gray-700 max-w-2xl mx-auto">
-            Oferecemos a melhor experiência para você adquirir seu produto Apple com segurança e facilidade.
+            Oferecemos a melhor experiência para você adquirir seu produto Apple com segurança, preço imbatível e atendimento premium. Cobrimos qualquer oferta!
           </p>
         </div>
 
@@ -41,7 +41,7 @@ export const FeaturesSection = () => {
           <Feature
             icon={<DollarSign className="h-6 w-6" />}
             title="Preços Oficiais"
-            description="Todos os produtos são oferecidos pelo mesmo preço do site oficial da Apple.com em dólares."
+            description="Trabalhamos com os valores mais baixos do mercado. Se achar oferta melhor, igualamos para você!"
           />
           
           <Feature
@@ -52,14 +52,14 @@ export const FeaturesSection = () => {
           
           <Feature
             icon={<Truck className="h-6 w-6" />}
-            title="Entrega Segura"
-            description="Receba seu produto com segurança e no prazo combinado diretamente na Florida."
+            title="Entrega VIP"
+            description="Entregamos em Orlando e Miami no seu hotel, Airbnb ou residência, sem custos e atendimento em português."
           />
           
           <Feature
             icon={<Check className="h-6 w-6" />}
             title="Suporte Completo"
-            description="Oferecemos suporte completo antes, durante e após a compra para sua total satisfação."
+            description="Oferecemos suporte total antes, durante e após a compra para sua satisfação."
           />
         </div>
       </div>
