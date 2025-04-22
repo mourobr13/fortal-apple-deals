@@ -53,7 +53,7 @@ export const FeaturesSection = () => {
           <Feature
             icon={<Truck className="h-6 w-6" />}
             title="Entrega Segura"
-            description="Receba seu produto com segurança e no prazo combinado, em qualquer lugar do Brasil."
+            description="Receba seu produto com segurança e no prazo combinado diretamente na Florida."
           />
           
           <Feature
