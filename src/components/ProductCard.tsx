@@ -19,7 +19,7 @@ export const ProductCard = ({ name, price, image, category }: ProductCardProps) 
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="aspect-square p-6 flex items-center justify-center bg-apple-gray-light">
-        <img src={image} alt={name} className="max-h-full object-contain" />
+        <img src={image} alt={name} className="max-h-full object-contain rounded-lg shadow-sm" />
       </div>
       <div className="p-6">
         <div className="flex justify-between items-start mb-3">

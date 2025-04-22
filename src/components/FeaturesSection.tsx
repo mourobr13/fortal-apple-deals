@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Badge } from "./ui/badge";
-import { ArrowRight, Check, DollarSign, Shield, Truck, Watch } from "lucide-react";
+import { ArrowRight, Check, DollarSign, Shield, Truck } from "lucide-react";
 
 interface FeatureProps {
   icon: React.ReactNode;
@@ -27,7 +27,7 @@ export const FeaturesSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <Badge className="mb-3 bg-apple-blue/10 text-apple-blue hover:bg-apple-blue/20 px-4 py-1">
-            Por que escolher a FortalSolutions?
+            Por que escolher a fortalezasolutions?
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Produtos Apple com preços oficiais e o menor valor do mercado

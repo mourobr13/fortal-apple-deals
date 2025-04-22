@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "./ui/button";
-import { Apple, Menu, X } from "lucide-react";
+import { Menu, X, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
@@ -12,11 +12,16 @@ export const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+    <header className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
       <div className="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Apple className="h-6 w-6" />
-          <span className="text-lg font-semibold">FortalSolutions</span>
+        <div className="flex items-center gap-3">
+          <img
+            src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png"
+            alt="Fortaleza Solutions Logo"
+            className="h-10 w-auto"
+            draggable={false}
+          />
+          <span className="text-lg font-semibold tracking-tight text-gray-900">fortalezasolutions</span>
         </div>
 
         {/* Desktop Navigation */}

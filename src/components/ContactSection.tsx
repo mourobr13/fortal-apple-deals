@@ -4,24 +4,43 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Mail, Phone } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import React, { useState } from "react";
 
 export const ContactSection = () => {
   const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
 
   const handleWhatsAppClick = () => {
-    const message = "Olá, estou interessado em produtos Apple da FortalSolutions. Poderia me ajudar?";
+    const message = "Olá, estou interessado em produtos Apple da fortalezasolutions. Poderia me ajudar?";
     const whatsappLink = `https://wa.me/5585997131313?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    toast({
-      title: "Mensagem enviada!",
-      description: "Entraremos em contato em breve.",
-      duration: 4000,
-    });
-    (e.target as HTMLFormElement).reset();
+    setLoading(true);
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const phone = formData.get('phone');
+    const message = formData.get('message');
+
+    // Envia a mensagem para o e-mail desejado via mailto:
+    const mailto = `mailto:agildosegundo@hotmail.com?subject=Contato fortalezasolutions&body=Nome: ${name}%0DE-mail: ${email}%0DTelefone: ${phone}%0DMensagem: ${message}`;
+    window.location.href = mailto;
+
+    setTimeout(() => {
+      toast({
+        title: "Mensagem iniciada!",
+        description: "Seu cliente de e-mail abrirá uma nova mensagem.",
+        duration: 4000,
+      });
+      setLoading(false);
+      form.reset();
+    }, 1000);
   };
 
   return (
@@ -70,8 +89,8 @@ export const ContactSection = () => {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full bg-apple-blue hover:bg-apple-blue-dark">
-                  Enviar mensagem
+                <Button type="submit" className="w-full bg-apple-blue hover:bg-apple-blue-dark" disabled={loading}>
+                  {loading ? "Enviando..." : "Enviar mensagem"}
                 </Button>
               </div>
             </form>
@@ -85,8 +104,8 @@ export const ContactSection = () => {
                   <Mail className="w-6 h-6 text-apple-blue mt-0.5" />
                   <div>
                     <p className="font-medium">E-mail</p>
-                    <a href="mailto:contato@fortalsolutions.com" className="text-apple-blue hover:underline">
-                      contato@fortalsolutions.com
+                    <a href="mailto:agildosegundo@hotmail.com" className="text-apple-blue hover:underline">
+                      agildosegundo@hotmail.com
                     </a>
                   </div>
                 </div>
@@ -104,7 +123,7 @@ export const ContactSection = () => {
                   <div>
                     <p className="font-medium">Entregas</p>
                     <p className="text-gray-600">
-                      Entregas em Orlando e Miami diretamente no seu hotel, Airbnb etc, sem custos e com atendimento em português
+                      Entregas em Orlando e Miami diretamente no seu hotel, Airbnb etc, sem custos e com atendimento em português.
                     </p>
                   </div>
                 </div>
