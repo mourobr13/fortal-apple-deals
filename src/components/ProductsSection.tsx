@@ -76,16 +76,16 @@ const products = {
     },
     {
       id: 10,
-      name: "iPhone 16PM 256 GB Natural",
+      name: "iPhone 16 Pro Max 256 GB Natural",
       price: 1199,
       image: "https://images.unsplash.com/photo-1589492477829-5e65395b66cc?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     },
     {
       id: 11,
-      name: "iPhone 16PM 256 GB Desert",
+      name: "iPhone 16 Pro Max 256 GB Desert",
       price: 1199,
-      image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?q=80&w=600&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1709306413255-2fff2dc4277a?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     }
   ],
