@@ -140,8 +140,8 @@ export const ProductsSection = () => {
             
         <div>
           <div className="container mx-auto">
-             <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">Como Funciona nossa sistemática de Trabalho:</h2>
-             <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600">
+             <h2 className="text-3xl md:text-4xl text-center font-bold mb-4 text-center">Como Funciona nossa sistemática de Trabalho:</h2>
+             <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600 text-center">
               Forma simples, descomplicada e segura de comprar seu produto dos sonhos diretamente dos Estados Unidos, com o menor valor do mercado e tratando diretamente com atendentes brasileiro(a) e zero burocracia.
              </p>
           <StepsBox />
