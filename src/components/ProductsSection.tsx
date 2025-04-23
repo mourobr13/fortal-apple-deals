@@ -34,7 +34,7 @@ const products = {
       id: 4,
       name: "AirPod 3",
       price: 149,
-      image: "https://images.unsplash.com/photo-1588156940671-6bb7d596293c?q=80&w=600&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1638430079585-8c6f2754c8f8?q=80&w=600&auto=format&fit=crop",
       category: "AirPods"
     },
     {
