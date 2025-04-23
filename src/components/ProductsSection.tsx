@@ -11,14 +11,14 @@ const products = {
       id: 1,
       name: "Apple Watch S10 42 mm",
       price: 399,
-      image: "https://images.unsplash.com/photo-1519400192645-cb2b9544a317?q=80&w=600&auto=format&fit=crop", // real apple watch
+      image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=600&auto=format&fit=crop",
       category: "Apple Watch"
     },
     {
       id: 2,
       name: "Apple Watch S10 46 mm",
       price: 429,
-      image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?q=80&w=600&auto=format&fit=crop", // real apple watch
+      image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?q=80&w=600&auto=format&fit=crop",
       category: "Apple Watch"
     }
   ],
@@ -27,21 +27,21 @@ const products = {
       id: 3,
       name: "AirPod 4",
       price: 179,
-      image: "https://images.unsplash.com/photo-1506741531397-02b47e68e2eb?q=80&w=600&auto=format&fit=crop", // AirPods 4
+      image: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=600&auto=format&fit=crop",
       category: "AirPods"
     },
     {
       id: 4,
       name: "AirPod 3",
       price: 149,
-      image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600&auto=format&fit=crop", // AirPods 3
+      image: "https://images.unsplash.com/photo-1588156940671-6bb7d596293c?q=80&w=600&auto=format&fit=crop",
       category: "AirPods"
     },
     {
       id: 5,
       name: "AirPod Pro",
       price: 249,
-      image: "https://images.unsplash.com/photo-1563201515-cfd69c7fa00b?q=80&w=600&auto=format&fit=crop", // AirPods Pro
+      image: "https://images.unsplash.com/photo-1603351154351-5e2d0600bb77?q=80&w=600&auto=format&fit=crop",
       category: "AirPods"
     }
   ],
@@ -50,42 +50,42 @@ const products = {
       id: 6,
       name: "iPhone 16e 256 GB White",
       price: 799,
-      image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=600&auto=format&fit=crop", // iPhone branco
+      image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     },
     {
       id: 7,
       name: "iPhone 16 Pro 128 GB Desert",
       price: 999,
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=600&auto=format&fit=crop", // iPhone Pro Desert
+      image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     },
     {
       id: 8,
       name: "iPhone 16 Pro 256 GB",
       price: 1099,
-      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=600&auto=format&fit=crop", // iPhone Pro Preto
+      image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     },
     {
       id: 9,
       name: "iPhone 16 Pro 512 GB",
       price: 1299,
-      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?q=80&w=600&auto=format&fit=crop", // iPhone Pro 512GB
+      image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     },
     {
       id: 10,
       name: "iPhone 16PM 256 GB Natural",
       price: 1199,
-      image: "https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=600&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1589492477829-5e65395b66cc?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     },
     {
       id: 11,
       name: "iPhone 16PM 256 GB Desert",
       price: 1199,
-      image: "https://images.unsplash.com/photo-1465101178521-c1a9136a7ed8?q=80&w=600&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?q=80&w=600&auto=format&fit=crop",
       category: "iPhone"
     }
   ],
@@ -94,14 +94,14 @@ const products = {
       id: 12,
       name: "iPad 11",
       price: 599,
-      image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?q=80&w=600&auto=format&fit=crop", // iPad
+      image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=600&auto=format&fit=crop",
       category: "iPad"
     },
     {
       id: 13,
       name: "iPad 10",
       price: 449,
-      image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=600&auto=format&fit=crop", // iPad
+      image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=600&auto=format&fit=crop",
       category: "iPad"
     }
   ]
