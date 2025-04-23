@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "./ui/button";
 import { Menu, X, Clock } from "lucide-react";
@@ -14,14 +13,13 @@ export const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-sm z-50">
       <div className="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div>
           <img
             src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png"
             alt="Fortaleza Solutions Logo"
-            className="h-10 w-auto"
+            className="h-16 w-auto" // Increased height from h-10 to h-16
             draggable={false}
           />
-          <span className="text-lg font-semibold tracking-tight text-gray-900">fortalezasolutions</span>
         </div>
 
         {/* Desktop Navigation */}
