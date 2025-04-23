@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ProductCard } from "./ProductCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -141,14 +140,14 @@ export const ProductsSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
+          <p className="text-gray-700 max-w-2xl mx-auto mb-8">
             Trabalhamos com preços oficiais e menor valor do mercado.
             Confira nossas categorias e escolha seu produto Apple!
           </p>
         </div>
         
         <div>
-          <h3 className="text-2xl font-semibold text-center mb-4">Como Funciona nossa sistemática de Trabalho:</h3>
+          <h3 className="text-2xl font-bold text-center mb-4">Como Funciona nossa sistemática de Trabalho:</h3>
           <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600">
             Forma simples, descomplicada e segura de comprar seu produto dos sonhos diretamente dos Estados Unidos, com o menor valor do mercado e tratando diretamente com atendentes brasileiro(a) e zero burocracia.
           </p>
@@ -237,4 +236,3 @@ export const ProductsSection = () => {
     </section>
   );
 };
-
