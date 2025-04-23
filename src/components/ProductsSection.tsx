@@ -139,6 +139,7 @@ export const ProductsSection = () => {
     <section id="products" className="py-20 px-4 md:px-6">
             
         <div>
+          <div className="container mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Como Funciona nossa sistemática de Trabalho:</h2>
           <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600">
             Forma simples, descomplicada e segura de comprar seu produto dos sonhos diretamente dos Estados Unidos, com o menor valor do mercado e tratando diretamente com atendentes brasileiro(a) e zero burocracia.
