@@ -142,10 +142,11 @@ export const ProductsSection = () => {
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
           <p className="text-gray-700 max-w-2xl mx-auto">
-            Trabalhamos com preços oficiais, menor valor do mercado e cobrimos qualquer oferta.
+            Trabalhamos com preços oficiais e menor valor do mercado.
             Confira nossas categorias e escolha seu produto Apple!
           </p>
         </div>
+        
         <div>
           <h3 className="text-2xl font-semibold text-center mb-4">Como Funciona nossa sistemática de Trabalho:</h3>
           <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600">
@@ -236,4 +237,4 @@ export const ProductsSection = () => {
     </section>
   );
 };
-// ATENÇÃO: Este arquivo está ficando muito grande (205+ linhas). Considere dividí-lo em componentes menores.
+

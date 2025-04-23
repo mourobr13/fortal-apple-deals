@@ -11,7 +11,7 @@ export const ContactSection = () => {
   const [loading, setLoading] = useState(false);
 
   const handleWhatsAppClick = () => {
-    const message = "Olá, estou interessado em produtos Apple da fortalezasolutions. Poderia me ajudar?";
+    const message = "Olá, estou interessado em produtos Apple da FortalezaSolutions. Poderia me ajudar?";
     const whatsappLink = `https://wa.me/5585997131313?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };
@@ -28,8 +28,7 @@ export const ContactSection = () => {
     const phone = formData.get('phone');
     const message = formData.get('message');
 
-    // Envia a mensagem para o e-mail desejado via mailto:
-    const mailto = `mailto:agildosegundo@hotmail.com?subject=Contato fortalezasolutions&body=Nome: ${name}%0DE-mail: ${email}%0DTelefone: ${phone}%0DMensagem: ${message}`;
+    const mailto = `mailto:contato@fortalezasolutions.com.br?subject=Contato FortalezaSolutions&body=Nome: ${name}%0DE-mail: ${email}%0DTelefone: ${phone}%0DMensagem: ${message}`;
     window.location.href = mailto;
 
     setTimeout(() => {
@@ -56,44 +55,41 @@ export const ContactSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="bg-white p-8 rounded-2xl shadow-md">
-            <h3 className="text-2xl font-semibold mb-6">Envie uma mensagem</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-1">
-                    Nome completo
-                  </label>
-                  <Input id="name" name="name" placeholder="Seu nome" required />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-1">
-                    E-mail
-                  </label>
-                  <Input id="email" name="email" type="email" placeholder="seu@email.com" required />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium mb-1">
-                    Telefone
-                  </label>
-                  <Input id="phone" name="phone" placeholder="(85) 99713-1313" />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-1">
-                    Mensagem
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Como podemos ajudar?"
-                    className="min-h-[120px]"
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full bg-apple-blue hover:bg-apple-blue-dark" disabled={loading}>
-                  {loading ? "Enviando..." : "Enviar mensagem"}
-                </Button>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-1">
+                  Nome completo
+                </label>
+                <Input id="name" name="name" placeholder="Seu nome" required />
               </div>
-            </form>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-1">
+                  E-mail
+                </label>
+                <Input id="email" name="email" type="email" placeholder="seu@email.com" required />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-1">
+                  Telefone
+                </label>
+                <Input id="phone" name="phone" placeholder="(85) 99713-1313" />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-1">
+                  Mensagem
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Como podemos ajudar?"
+                  className="min-h-[120px]"
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full bg-apple-blue hover:bg-apple-blue-dark" disabled={loading}>
+                {loading ? "Enviando..." : "Enviar mensagem"}
+              </Button>
+            </div>
           </div>
 
           <div className="flex flex-col justify-between gap-8">
@@ -104,8 +100,8 @@ export const ContactSection = () => {
                   <Mail className="w-6 h-6 text-apple-blue mt-0.5" />
                   <div>
                     <p className="font-medium">E-mail</p>
-                    <a href="mailto:agildosegundo@hotmail.com" className="text-apple-blue hover:underline">
-                      agildosegundo@hotmail.com
+                    <a href="mailto:contato@fortalezasolutions.com.br" className="text-apple-blue hover:underline">
+                      contato@fortalezasolutions.com.br
                     </a>
                   </div>
                 </div>
@@ -150,3 +146,4 @@ export const ContactSection = () => {
     </section>
   );
 };
+

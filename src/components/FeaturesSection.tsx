@@ -23,14 +23,14 @@ const Feature = ({ icon, title, description }: FeatureProps) => {
 
 export const FeaturesSection = () => {
   return (
-    <section className="py-16 px-4 md:px-6">
+    <section className="py-8 px-4 md:px-6">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <Badge className="mb-3 bg-apple-blue/10 text-apple-blue hover:bg-apple-blue/20 px-4 py-1">
-            Por que escolher a fortalezasolutions?
+            Por que escolher a FortalezaSolutions?
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Produtos Apple com preços oficiais e o menor valor do mercado
+            Produtos Apple Originais e Novos com menor valor de mercado
           </h2>
           <p className="text-gray-700 max-w-2xl mx-auto">
             Oferecemos a melhor experiência para você adquirir seu produto Apple com segurança, preço imbatível e atendimento premium. Cobrimos qualquer oferta!
@@ -66,3 +66,4 @@ export const FeaturesSection = () => {
     </section>
   );
 };
+
