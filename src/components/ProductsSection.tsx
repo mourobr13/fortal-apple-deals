@@ -1,3 +1,4 @@
+
 import React from "react";
 import { ProductCard } from "./ProductCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -137,102 +138,102 @@ export const ProductsSection = () => {
 
   return (
     <section id="products" className="py-20 px-4 md:px-6">
-            
-        <div>
-          <div className="container mx-auto">
-             <h2 className="text-3xl md:text-4xl text-center font-bold mb-4 text-center">Como Funciona nossa sistemática de Trabalho:</h2>
-             <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600 text-center">
-              Forma simples, descomplicada e segura de comprar seu produto dos sonhos diretamente dos Estados Unidos, com o menor valor do mercado e tratando diretamente com atendentes brasileiro(a) e zero burocracia.
-             </p>
+      <div>
+        <div className="container mx-auto">
+          <h2 className="text-3xl md:text-4xl text-center font-bold mb-4 text-center">Como Funciona nossa sistemática de Trabalho:</h2>
+          <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600 text-center">
+            Forma simples, descomplicada e segura de comprar seu produto dos sonhos diretamente dos Estados Unidos, com o menor valor do mercado e tratando diretamente com atendentes brasileiro(a) e zero burocracia.
+          </p>
           <StepsBox />
         </div>
 
-      <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto mb-8">
-            Confira nossas categorias e escolha seu produto Apple!
-          </p>
-        </div>
-
-        <Tabs defaultValue="iphones" className="w-full">
-          <div className="flex justify-center mb-8">
-            <TabsList>
-              <TabsTrigger value="iphones" className="flex items-center gap-2">
-                <IPhone className="h-5 w-5" />
-                <span className="inline">iPhones</span>
-              </TabsTrigger>
-              <TabsTrigger value="watches" className="flex items-center gap-2">
-                <WatchIcon className="h-5 w-5" />
-                <span className="inline">Apple Watch</span>
-              </TabsTrigger>
-              <TabsTrigger value="airpods" className="flex items-center gap-2">
-                <Airpods className="h-5 w-5" />
-                <span className="inline">AirPods</span>
-              </TabsTrigger>
-              <TabsTrigger value="ipads" className="flex items-center gap-2">
-                <IPad className="h-5 w-5" />
-                <span className="inline">iPads</span>
-              </TabsTrigger>
-            </TabsList>
+        <div className="container mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
+            <p className="text-gray-700 max-w-2xl mx-auto mb-8">
+              Confira nossas categorias e escolha seu produto Apple!
+            </p>
           </div>
-          
-          <TabsContent value="watches" className="mt-4" id="watches">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-              {products.watches.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  category={product.category}
-                />
-              ))}
-            </div>
-          </TabsContent>
 
-          <TabsContent value="airpods" className="mt-4" id="airpods">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.airpods.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  category={product.category}
-                />
-              ))}
+          <Tabs defaultValue="iphones" className="w-full">
+            <div className="flex justify-center mb-8">
+              <TabsList>
+                <TabsTrigger value="iphones" className="flex items-center gap-2">
+                  <IPhone className="h-5 w-5" />
+                  <span className="inline">iPhones</span>
+                </TabsTrigger>
+                <TabsTrigger value="watches" className="flex items-center gap-2">
+                  <WatchIcon className="h-5 w-5" />
+                  <span className="inline">Apple Watch</span>
+                </TabsTrigger>
+                <TabsTrigger value="airpods" className="flex items-center gap-2">
+                  <Airpods className="h-5 w-5" />
+                  <span className="inline">AirPods</span>
+                </TabsTrigger>
+                <TabsTrigger value="ipads" className="flex items-center gap-2">
+                  <IPad className="h-5 w-5" />
+                  <span className="inline">iPads</span>
+                </TabsTrigger>
+              </TabsList>
             </div>
-          </TabsContent>
+            
+            <TabsContent value="watches" className="mt-4" id="watches">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                {products.watches.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    name={product.name}
+                    price={product.price}
+                    image={product.image}
+                    category={product.category}
+                  />
+                ))}
+              </div>
+            </TabsContent>
 
-          <TabsContent value="iphones" className="mt-4" id="iphones">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.iphones.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  category={product.category}
-                />
-              ))}
-            </div>
-          </TabsContent>
+            <TabsContent value="airpods" className="mt-4" id="airpods">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {products.airpods.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    name={product.name}
+                    price={product.price}
+                    image={product.image}
+                    category={product.category}
+                  />
+                ))}
+              </div>
+            </TabsContent>
 
-          <TabsContent value="ipads" className="mt-4" id="ipads">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {products.ipads.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  category={product.category}
-                />
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
+            <TabsContent value="iphones" className="mt-4" id="iphones">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {products.iphones.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    name={product.name}
+                    price={product.price}
+                    image={product.image}
+                    category={product.category}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="ipads" className="mt-4" id="ipads">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {products.ipads.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    name={product.name}
+                    price={product.price}
+                    image={product.image}
+                    category={product.category}
+                  />
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </section>
   );
