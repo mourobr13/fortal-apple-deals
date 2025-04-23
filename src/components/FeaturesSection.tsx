@@ -40,8 +40,8 @@ export const FeaturesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           <Feature
             icon={<DollarSign className="h-6 w-6" />}
-            title="Preços Oficiais"
-            description="Trabalhamos com os valores mais baixos do mercado. Se achar oferta melhor, igualamos para você!"
+            title="Preços Imbatíveis"
+            description="Trabalhamos com os valores mais baixos do mercado. Se achar oferta melhor, cobrimos para você!"
           />
           
           <Feature
