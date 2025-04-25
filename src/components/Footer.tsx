@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="flex flex-col items-center md:items-start gap-4 mb-6 md:mb-0">
             <img
-              src="/lovable-uploads/01869dd4-b29e-4b45-8b12-18e8d7fc6503.png"
+              src="/lovable-uploads/6fdeab6b-c427-4948-937f-89a073dbfe3d.png"
               alt="Fortaleza Solutions Logo"
               className="h-32 w-auto"
               draggable={false}
