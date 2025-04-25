@@ -3,22 +3,18 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-apple-gray-dark py-12 px-4 md:px-6 text-white">
+    <footer className="py-12 px-4 md:px-6 text-white" style={{ backgroundColor: "#1C1818" }}>
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <div className="flex items-center gap-2 mb-6 md:mb-0">
+          <div className="flex flex-col items-center md:items-start gap-4 mb-6 md:mb-0">
             <img
-              src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png"
+              src="/lovable-uploads/01869dd4-b29e-4b45-8b12-18e8d7fc6503.png"
               alt="Fortaleza Solutions Logo"
-              className="h-8 w-auto"
+              className="h-32 w-auto"
               draggable={false}
             />
-            <span className="text-xl font-semibold">fortalezasolutions</span>
           </div>
           <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-            <a href="#home" className="text-gray-300 hover:text-white transition-colors">
-              Home
-            </a>
             <a href="#products" className="text-gray-300 hover:text-white transition-colors">
               Produtos
             </a>

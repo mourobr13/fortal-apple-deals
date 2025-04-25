@@ -1,7 +1,7 @@
+
 import React from "react";
 import { Button } from "./ui/button";
-import { Menu, X, Clock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -17,16 +17,13 @@ export const Header = () => {
           <img
             src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png"
             alt="Fortaleza Solutions Logo"
-            className="h-16 w-auto" // Increased height from h-10 to h-16
+            className="h-20 w-auto" 
             draggable={false}
           />
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#home" className="text-gray-800 hover:text-apple-blue transition-colors">
-            Home
-          </a>
           <a href="#products" className="text-gray-800 hover:text-apple-blue transition-colors">
             Produtos
           </a>
@@ -52,13 +49,6 @@ export const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white py-4 px-6 shadow-lg">
           <nav className="flex flex-col space-y-4">
-            <a 
-              href="#home" 
-              onClick={() => setIsMenuOpen(false)}
-              className="text-gray-800 hover:text-apple-blue transition-colors"
-            >
-              Home
-            </a>
             <a 
               href="#products" 
               onClick={() => setIsMenuOpen(false)}

@@ -7,9 +7,10 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="pt-28 pb-8 md:py-32 px-4 md:px-6 bg-gradient-to-b from-white to-apple-gray-light"
+      className="pt-28 pb-8 md:py-32 px-4 md:px-6 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1609334761848-77b4d1994040')" }}
     >
-      <div className="container mx-auto max-w-4xl">
+      <div className="container mx-auto max-w-4xl bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow">
         <div className="mx-auto text-center mb-12">
           <img
             src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png"
@@ -39,4 +40,3 @@ export const Hero = () => {
     </section>
   );
 };
-
