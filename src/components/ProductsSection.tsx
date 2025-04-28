@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ProductCard } from "./ProductCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -107,133 +106,97 @@ const products = {
   ]
 };
 
-const StepsBox = () => (
-  <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row justify-between items-stretch p-8 md:p-12 mb-12 max-w-5xl mx-auto gap-6">
-    <div className="flex-1 flex flex-col items-center text-center px-4">
-      <div className="text-apple-blue bg-apple-blue/10 rounded-full w-12 h-12 flex items-center justify-center mb-2 font-bold text-xl">1</div>
-      <h3 className="font-semibold text-lg mb-1">Escolha seu Item</h3>
-      <p className="text-gray-600 text-sm">Veja qual produto está querendo comprar e clique em <b>Comprar</b>!</p>
-    </div>
-    <div className="hidden md:flex items-center justify-center relative">
-      <div className="w-9 h-1 bg-apple-blue/10 rounded mx-4" />
-    </div>
-    <div className="flex-1 flex flex-col items-center text-center px-4">
-      <div className="text-apple-blue bg-apple-blue/10 rounded-full w-12 h-12 flex items-center justify-center mb-2 font-bold text-xl">2</div>
-      <h3 className="font-semibold text-lg mb-1">Redirecionamento</h3>
-      <p className="text-gray-600 text-sm">Você falará diretamente com nossa equipe de vendas, atendimento humanizado para fechar sua solicitação e em Português.</p>
-    </div>
-    <div className="hidden md:flex items-center justify-center relative">
-      <div className="w-9 h-1 bg-apple-blue/10 rounded mx-4" />
-    </div>
-    <div className="flex-1 flex flex-col items-center text-center px-4">
-      <div className="text-apple-blue bg-apple-blue/10 rounded-full w-12 h-12 flex items-center justify-center mb-2 font-bold text-xl">3</div>
-      <h3 className="font-semibold text-lg mb-1">Fechamento</h3>
-      <p className="text-gray-600 text-sm">Pague via PIX, cartão brasileiro até 12x ou em dólar no seu hotel/casa/Airbnb.<br/>Entregas Miami ou Orlando sem custos e atendimento em português.</p>
-    </div>
-  </div>
-);
-
 export const ProductsSection = () => {
   const isMobile = useIsMobile();
 
   return (
     <section id="products" className="py-20 px-4 md:px-6">
-      <div>
-        <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center font-bold mb-4 text-center">Como Funciona nossa sistemática de Trabalho:</h2>
-          <p className="max-w-2xl text-center mx-auto mb-8 text-gray-600 text-center">
-            Forma simples, descomplicada e segura de comprar seu produto dos sonhos diretamente dos Estados Unidos, com o menor valor do mercado e tratando diretamente com atendentes brasileiro(a) e zero burocracia.
+      <div className="container mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
+          <p className="text-gray-700 max-w-2xl mx-auto mb-8">
+            Confira nossas categorias e escolha seu produto Apple!
           </p>
-          <StepsBox />
         </div>
 
-        <div className="container mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
-            <p className="text-gray-700 max-w-2xl mx-auto mb-8">
-              Confira nossas categorias e escolha seu produto Apple!
-            </p>
+        <Tabs defaultValue="iphones" className="w-full">
+          <div className="flex justify-center mb-8">
+            <TabsList>
+              <TabsTrigger value="iphones" className="flex items-center gap-2">
+                <IPhone className="h-5 w-5" />
+                <span className="inline">iPhones</span>
+              </TabsTrigger>
+              <TabsTrigger value="watches" className="flex items-center gap-2">
+                <WatchIcon className="h-5 w-5" />
+                <span className="inline">Apple Watch</span>
+              </TabsTrigger>
+              <TabsTrigger value="airpods" className="flex items-center gap-2">
+                <Airpods className="h-5 w-5" />
+                <span className="inline">AirPods</span>
+              </TabsTrigger>
+              <TabsTrigger value="ipads" className="flex items-center gap-2">
+                <IPad className="h-5 w-5" />
+                <span className="inline">iPads</span>
+              </TabsTrigger>
+            </TabsList>
           </div>
-
-          <Tabs defaultValue="iphones" className="w-full">
-            <div className="flex justify-center mb-8">
-              <TabsList>
-                <TabsTrigger value="iphones" className="flex items-center gap-2">
-                  <IPhone className="h-5 w-5" />
-                  <span className="inline">iPhones</span>
-                </TabsTrigger>
-                <TabsTrigger value="watches" className="flex items-center gap-2">
-                  <WatchIcon className="h-5 w-5" />
-                  <span className="inline">Apple Watch</span>
-                </TabsTrigger>
-                <TabsTrigger value="airpods" className="flex items-center gap-2">
-                  <Airpods className="h-5 w-5" />
-                  <span className="inline">AirPods</span>
-                </TabsTrigger>
-                <TabsTrigger value="ipads" className="flex items-center gap-2">
-                  <IPad className="h-5 w-5" />
-                  <span className="inline">iPads</span>
-                </TabsTrigger>
-              </TabsList>
+          
+          <TabsContent value="watches" className="mt-4" id="watches">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+              {products.watches.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  category={product.category}
+                />
+              ))}
             </div>
-            
-            <TabsContent value="watches" className="mt-4" id="watches">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-                {products.watches.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    name={product.name}
-                    price={product.price}
-                    image={product.image}
-                    category={product.category}
-                  />
-                ))}
-              </div>
-            </TabsContent>
+          </TabsContent>
 
-            <TabsContent value="airpods" className="mt-4" id="airpods">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.airpods.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    name={product.name}
-                    price={product.price}
-                    image={product.image}
-                    category={product.category}
-                  />
-                ))}
-              </div>
-            </TabsContent>
+          <TabsContent value="airpods" className="mt-4" id="airpods">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.airpods.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  category={product.category}
+                />
+              ))}
+            </div>
+          </TabsContent>
 
-            <TabsContent value="iphones" className="mt-4" id="iphones">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.iphones.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    name={product.name}
-                    price={product.price}
-                    image={product.image}
-                    category={product.category}
-                  />
-                ))}
-              </div>
-            </TabsContent>
+          <TabsContent value="iphones" className="mt-4" id="iphones">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.iphones.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  category={product.category}
+                />
+              ))}
+            </div>
+          </TabsContent>
 
-            <TabsContent value="ipads" className="mt-4" id="ipads">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {products.ipads.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    name={product.name}
-                    price={product.price}
-                    image={product.image}
-                    category={product.category}
-                  />
-                ))}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
+          <TabsContent value="ipads" className="mt-4" id="ipads">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {products.ipads.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  category={product.category}
+                />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
   );
