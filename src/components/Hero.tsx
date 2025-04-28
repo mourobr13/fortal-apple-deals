@@ -1,9 +1,16 @@
-
 import React from "react";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
+  const scrollToProducts = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const productsSection = document.querySelector('#products .text-3xl.md\\:text-4xl');
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       id="home"
@@ -26,7 +33,7 @@ export const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="bg-apple-blue hover:bg-apple-blue-dark text-white px-8 py-6 rounded-lg shadow font-semibold text-lg">
-              <a href="#products">
+              <a href="#products" onClick={scrollToProducts}>
                 Explorar produtos
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>

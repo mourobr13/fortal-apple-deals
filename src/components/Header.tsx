@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
@@ -7,6 +8,15 @@ export const Header = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const scrollToProducts = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const productsSection = document.querySelector('#products .text-3xl.md\\:text-4xl');
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
   };
 
   return (
@@ -23,14 +33,14 @@ export const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#products" className="text-gray-800 hover:text-apple-blue transition-colors">
+          <a href="#products" onClick={scrollToProducts} className="text-gray-800 hover:text-apple-blue transition-colors">
             Produtos
           </a>
           <a href="#contact" className="text-gray-800 hover:text-apple-blue transition-colors">
             Contato
           </a>
           <Button asChild variant="default" className="bg-apple-blue hover:bg-apple-blue-dark">
-            <a href="#products">Ver produtos</a>
+            <a href="#products" onClick={scrollToProducts}>Ver produtos</a>
           </Button>
         </nav>
 
@@ -50,7 +60,7 @@ export const Header = () => {
           <nav className="flex flex-col space-y-4">
             <a 
               href="#products" 
-              onClick={() => setIsMenuOpen(false)}
+              onClick={scrollToProducts}
               className="text-gray-800 hover:text-apple-blue transition-colors"
             >
               Produtos
@@ -63,7 +73,7 @@ export const Header = () => {
               Contato
             </a>
             <Button asChild variant="default" className="w-full bg-apple-blue hover:bg-apple-blue-dark">
-              <a href="#products" onClick={() => setIsMenuOpen(false)}>Ver produtos</a>
+              <a href="#products" onClick={scrollToProducts}>Ver produtos</a>
             </Button>
           </nav>
         </div>
