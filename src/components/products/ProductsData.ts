@@ -1,4 +1,3 @@
-
 export interface Product {
   id: number;
   name: string;
@@ -12,6 +11,7 @@ export interface ProductsData {
   airpods: Product[];
   iphones: Product[];
   ipads: Product[];
+  macbooks: Product[];
 }
 
 export const products: ProductsData = {
@@ -112,6 +112,15 @@ export const products: ProductsData = {
       price: 449,
       image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=600&auto=format&fit=crop",
       category: "iPad"
+    }
+  ],
+  macbooks: [
+    {
+      id: 14,
+      name: "MacBook Air 13\"",
+      price: 999,
+      image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=600&auto=format&fit=crop",
+      category: "MacBook"
     }
   ]
 };

@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Watch as WatchIcon, Phone as IPhone, Tablet as IPad, Headphones as Airpods } from "lucide-react";
+import { Watch as WatchIcon, Phone as IPhone, Tablet as IPad, Headphones as Airpods, Laptop } from "lucide-react";
 import { ProductsList } from "./ProductsList";
 import { Product } from "./ProductsData";
 
@@ -11,6 +11,7 @@ interface ProductsTabsProps {
     airpods: Product[];
     iphones: Product[];
     ipads: Product[];
+    macbooks: Product[];
   };
 }
 
@@ -35,6 +36,10 @@ export const ProductsTabs = ({ products }: ProductsTabsProps) => {
             <IPad className="h-5 w-5" />
             <span className="inline">iPads</span>
           </TabsTrigger>
+          <TabsTrigger value="macbooks" className="flex items-center gap-2">
+            <Laptop className="h-5 w-5" />
+            <span className="inline">MacBooks</span>
+          </TabsTrigger>
         </TabsList>
       </div>
       
@@ -52,6 +57,10 @@ export const ProductsTabs = ({ products }: ProductsTabsProps) => {
 
       <TabsContent value="ipads" className="mt-4" id="ipads">
         <ProductsList products={products.ipads} />
+      </TabsContent>
+
+      <TabsContent value="macbooks" className="mt-4" id="macbooks">
+        <ProductsList products={products.macbooks} />
       </TabsContent>
     </Tabs>
   );
