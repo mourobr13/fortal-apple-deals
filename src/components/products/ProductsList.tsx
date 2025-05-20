@@ -1,14 +1,7 @@
 
 import React from "react";
-import { ProductCard } from "../ProductCard";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-}
+import { ProductCard } from "./ProductCard";
+import { Product } from "./ProductsData";
 
 interface ProductsListProps {
   products: Product[];
