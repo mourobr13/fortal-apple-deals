@@ -20,7 +20,7 @@ export const ProductsTabs = ({ products }: ProductsTabsProps) => {
     <Tabs defaultValue="iphones" className="w-full">
       <div className="flex flex-col items-center mb-8 space-y-2">
         {/* Primeira linha - 3 botões */}
-        <div className="flex flex-wrap justify-center gap-2">
+        <TabsList className="grid grid-cols-3 gap-2 h-auto p-1">
           <TabsTrigger value="iphones" className="flex items-center gap-2">
             <IPhone className="h-5 w-5" />
             <span className="inline">iPhones</span>
@@ -33,10 +33,10 @@ export const ProductsTabs = ({ products }: ProductsTabsProps) => {
             <Airpods className="h-5 w-5" />
             <span className="inline">AirPods</span>
           </TabsTrigger>
-        </div>
+        </TabsList>
         
         {/* Segunda linha - 2 botões */}
-        <div className="flex flex-wrap justify-center gap-2">
+        <TabsList className="grid grid-cols-2 gap-2 h-auto p-1">
           <TabsTrigger value="ipads" className="flex items-center gap-2">
             <IPad className="h-5 w-5" />
             <span className="inline">iPads</span>
@@ -45,7 +45,7 @@ export const ProductsTabs = ({ products }: ProductsTabsProps) => {
             <Laptop className="h-5 w-5" />
             <span className="inline">MacBooks</span>
           </TabsTrigger>
-        </div>
+        </TabsList>
       </div>
       
       <TabsContent value="watches" className="mt-4" id="watches">
