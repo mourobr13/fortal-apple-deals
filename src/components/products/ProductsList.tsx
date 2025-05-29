@@ -9,8 +9,8 @@ interface Product {
   price: number;
   image: string;
   category: string;
-  description?: string | null;
-  details?: string | null;
+  description: string | null;
+  details: string | null;
 }
 
 interface ProductsListProps {

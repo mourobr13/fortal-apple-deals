@@ -27,11 +27,6 @@ const Admin = () => {
   const [showForm, setShowForm] = useState(false);
   const [loadingProducts, setLoadingProducts] = useState(true);
 
-  // Redirect if not admin
-  if (!loading && (!user || !isAdmin)) {
-    return <Navigate to="/auth" replace />;
-  }
-
   useEffect(() => {
     if (isAdmin) {
       fetchProducts();
@@ -91,12 +86,18 @@ const Admin = () => {
     }
   };
 
+  // Show loading state while checking auth
   if (loading || loadingProducts) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-lg">Carregando...</div>
       </div>
     );
+  }
+
+  // Redirect if not admin - moved after all hooks
+  if (!user || !isAdmin) {
+    return <Navigate to="/auth" replace />;
   }
 
   return (
