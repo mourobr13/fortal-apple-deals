@@ -1,20 +1,20 @@
 
 import React from "react";
 import { ProductsTabs } from "./ProductsTabs";
-import { products } from "./ProductsData";
 
 export const ProductsSection = () => {
   return (
-    <section id="products" className="py-20 px-4 md:px-6">
-      <div className="container mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto mb-8">
-            Confira nossas categorias e escolha seu produto Apple!
+    <section className="py-20 bg-gray-50" id="produtos">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4">Nossos Produtos Apple</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Descubra nossa seleção completa de produtos Apple. Desde iPhones até MacBooks, 
+            temos tudo que você precisa para se manter conectado e produtivo.
           </p>
         </div>
-
-        <ProductsTabs products={products} />
+        
+        <ProductsTabs />
       </div>
     </section>
   );

@@ -1,21 +1,96 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Watch as WatchIcon, Phone as IPhone, Tablet as IPad, Headphones as Airpods, Laptop } from "lucide-react";
 import { ProductsList } from "./ProductsList";
-import { Product } from "./ProductsData";
+import { supabase } from "@/integrations/supabase/client";
 
-interface ProductsTabsProps {
-  products: {
-    watches: Product[];
-    airpods: Product[];
-    iphones: Product[];
-    ipads: Product[];
-    macbooks: Product[];
-  };
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+  description?: string | null;
+  details?: string | null;
 }
 
-export const ProductsTabs = ({ products }: ProductsTabsProps) => {
+interface ProductsData {
+  watches: Product[];
+  airpods: Product[];
+  iphones: Product[];
+  ipads: Product[];
+  macbooks: Product[];
+}
+
+export const ProductsTabs = () => {
+  const [products, setProducts] = useState<ProductsData>({
+    watches: [],
+    airpods: [],
+    iphones: [],
+    ipads: [],
+    macbooks: []
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: true });
+
+      if (error) throw error;
+
+      // Group products by category
+      const groupedProducts: ProductsData = {
+        watches: [],
+        airpods: [],
+        iphones: [],
+        ipads: [],
+        macbooks: []
+      };
+
+      data?.forEach((product) => {
+        switch (product.category) {
+          case 'Apple Watch':
+            groupedProducts.watches.push(product);
+            break;
+          case 'AirPods':
+            groupedProducts.airpods.push(product);
+            break;
+          case 'iPhone':
+            groupedProducts.iphones.push(product);
+            break;
+          case 'iPad':
+            groupedProducts.ipads.push(product);
+            break;
+          case 'MacBook':
+            groupedProducts.macbooks.push(product);
+            break;
+        }
+      });
+
+      setProducts(groupedProducts);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-12">
+        <div className="text-lg">Carregando produtos...</div>
+      </div>
+    );
+  }
+
   return (
     <Tabs defaultValue="iphones" className="w-full">
       <div className="flex flex-col items-center mb-8 space-y-2">
