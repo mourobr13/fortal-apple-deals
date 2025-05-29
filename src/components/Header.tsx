@@ -61,7 +61,11 @@ export const Header = () => {
             variant="outline"
             className="flex items-center gap-2 text-sm"
           >
-            🇧🇷
+            <img
+              src="/lovable-uploads/0bd28f91-d412-4642-ab16-b99584d04c01.png"
+              alt="Brasil"
+              className="w-4 h-4"
+            />
             <span>WhatsApp BR</span>
           </Button>
           
@@ -71,7 +75,11 @@ export const Header = () => {
             variant="outline"
             className="flex items-center gap-2 text-sm"
           >
-            🇺🇸
+            <img
+              src="/lovable-uploads/021b6702-bcbd-47bd-bea1-17cba1b827cd.png"
+              alt="EUA"
+              className="w-4 h-4"
+            />
             <span>WhatsApp EUA</span>
           </Button>
         </nav>
@@ -117,7 +125,11 @@ export const Header = () => {
               variant="outline"
               className="w-full flex items-center gap-2 justify-center"
             >
-              🇧🇷
+              <img
+                src="/lovable-uploads/0bd28f91-d412-4642-ab16-b99584d04c01.png"
+                alt="Brasil"
+                className="w-4 h-4"
+              />
               <span>WhatsApp BR</span>
             </Button>
             
@@ -130,7 +142,11 @@ export const Header = () => {
               variant="outline"
               className="w-full flex items-center gap-2 justify-center"
             >
-              🇺🇸
+              <img
+                src="/lovable-uploads/021b6702-bcbd-47bd-bea1-17cba1b827cd.png"
+                alt="EUA"
+                className="w-4 h-4"
+              />
               <span>WhatsApp EUA</span>
             </Button>
           </nav>
