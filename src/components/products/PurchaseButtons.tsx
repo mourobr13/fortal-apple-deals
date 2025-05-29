@@ -15,7 +15,7 @@ export const PurchaseButtons = ({ name, price }: PurchaseButtonsProps) => {
   };
 
   const handleBuyClickUSA = () => {
-    const message = `Hello, I'm interested in the product: ${name} for $${price}. I would like more information to make the purchase.`;
+    const message = `Olá, estou interessado(a) no produto: ${name} por $${price}. Gostaria de mais informações para realizar a compra.`;
     const whatsappLink = `https://wa.me/14077576972?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };

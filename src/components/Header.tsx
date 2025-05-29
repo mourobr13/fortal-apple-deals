@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
@@ -28,7 +29,7 @@ export const Header = () => {
   };
   
   const handleWhatsAppUSA = () => {
-    const message = "Hello, I'm interested in Apple products from FortalezaSolutions. Could you help me?";
+    const message = "Olá, estou interessado em produtos Apple da FortalezaSolutions. Poderia me ajudar?";
     const whatsappLink = `https://wa.me/14077576972?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };
