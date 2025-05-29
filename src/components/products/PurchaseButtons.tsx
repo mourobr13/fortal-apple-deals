@@ -28,7 +28,7 @@ export const PurchaseButtons = ({ name, price }: PurchaseButtonsProps) => {
       >
         <img src="/lovable-uploads/0bd28f91-d412-4642-ab16-b99584d04c01.png" alt="Brasil" className="w-4 h-4" />
         <ShoppingCart className="h-4 w-4" />
-        Compra Whats BR
+        Whatsapp BR
       </Button>
       
       <Button
@@ -37,7 +37,7 @@ export const PurchaseButtons = ({ name, price }: PurchaseButtonsProps) => {
       >
         <img src="/lovable-uploads/021b6702-bcbd-47bd-bea1-17cba1b827cd.png" alt="EUA" className="w-4 h-4" />
         <ShoppingCart className="h-4 w-4" />
-        Compra Whats EUA
+        Whatsapp EUA
       </Button>
     </div>
   );
