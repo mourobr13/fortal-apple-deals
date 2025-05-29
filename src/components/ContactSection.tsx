@@ -46,9 +46,12 @@ export const ContactSection = () => {
                   <p className="font-medium">WhatsApp BR</p>
                   <div className="flex items-center gap-2">
                     <img src="/lovable-uploads/0bd28f91-d412-4642-ab16-b99584d04c01.png" alt="Brasil" className="w-4 h-4" />
-                    <a href="tel:+5585997131313" className="text-apple-blue hover:underline">
+                    <button 
+                      onClick={handleWhatsAppBRClick}
+                      className="text-apple-blue hover:underline cursor-pointer"
+                    >
                       +55 85 99713-1313
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -58,9 +61,12 @@ export const ContactSection = () => {
                   <p className="font-medium">WhatsApp EUA</p>
                   <div className="flex items-center gap-2">
                     <img src="/lovable-uploads/021b6702-bcbd-47bd-bea1-17cba1b827cd.png" alt="EUA" className="w-4 h-4" />
-                    <a href="tel:+14077576972" className="text-apple-blue hover:underline">
+                    <button 
+                      onClick={handleWhatsAppUSAClick}
+                      className="text-apple-blue hover:underline cursor-pointer"
+                    >
                       +1 407 757-6972
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
