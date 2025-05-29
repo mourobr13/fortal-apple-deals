@@ -2,7 +2,7 @@
 import { Card, CardContent } from "../ui/card";
 import { ProductImage } from "./ProductImage";
 import { ProductInfo } from "./ProductInfo";
-import { BuyButton } from "./BuyButton";
+import { PurchaseButtons } from "./PurchaseButtons";
 
 interface ProductCardProps {
   name: string;
@@ -18,7 +18,7 @@ export const ProductCard = ({ name, price, image, category }: ProductCardProps) 
       <CardContent className="p-6">
         <ProductInfo name={name} category={category} price={price} />
         <div className="mt-4">
-          <BuyButton name={name} price={price} />
+          <PurchaseButtons name={name} price={price} />
         </div>
       </CardContent>
     </Card>
