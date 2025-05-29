@@ -1,5 +1,5 @@
 
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import React from "react";
 
 export const ContactSection = () => {
@@ -40,6 +40,17 @@ export const ContactSection = () => {
                   <a href="tel:+5585997131313" className="text-apple-blue hover:underline">
                     +55 85 99713-1313
                   </a>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <MapPin className="w-6 h-6 text-apple-blue mt-0.5" />
+                <div>
+                  <p className="font-medium">Endereço</p>
+                  <p className="text-gray-700">
+                    2121 South Hiawasse Road<br />
+                    Sala 118 Metrowest<br />
+                    Orlando FL. Zip Code. 32835
+                  </p>
                 </div>
               </div>
             </div>
