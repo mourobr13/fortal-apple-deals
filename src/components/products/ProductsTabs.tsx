@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Watch as WatchIcon, Phone as IPhone, Tablet as IPad, Headphones as Airpods, Laptop } from "lucide-react";
@@ -11,8 +10,8 @@ interface Product {
   price: number;
   image: string;
   category: string;
-  description?: string | null;
-  details?: string | null;
+  description: string | null;
+  details: string | null;
 }
 
 interface ProductsData {
