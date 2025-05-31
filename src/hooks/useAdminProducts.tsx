@@ -15,7 +15,7 @@ interface Product {
   updated_at: string;
 }
 
-export const useAdminProducts = (authLoading: boolean, user: any) => {
+export const useAdminProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -118,22 +118,11 @@ export const useAdminProducts = (authLoading: boolean, user: any) => {
     }
   };
 
-  // Aguardar autenticação antes de carregar produtos
+  // Carregar produtos quando o hook é inicializado
   useEffect(() => {
-    if (authLoading) {
-      console.log('⏳ Aguardando autenticação...');
-      return;
-    }
-    
-    console.log('🚀 Admin component pronto, iniciando busca de produtos...');
-    console.log('👤 Estado do usuário:', { 
-      hasUser: !!user, 
-      userId: user?.id,
-      userEmail: user?.email 
-    });
-    
+    console.log('🚀 useAdminProducts inicializado, carregando produtos...');
     fetchProducts();
-  }, [authLoading, user]);
+  }, []);
 
   return {
     products,

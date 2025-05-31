@@ -6,8 +6,8 @@ import { AdminProductForm } from '@/components/admin/AdminProductForm';
 import { AdminHeader } from '@/components/admin/AdminHeader';
 import { AdminErrorAlert } from '@/components/admin/AdminErrorAlert';
 import { AdminDebugInfo } from '@/components/admin/AdminDebugInfo';
-import { AdminLoadingScreen } from '@/components/admin/AdminLoadingScreen';
 import { AdminProductsSection } from '@/components/admin/AdminProductsSection';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { toast } from 'sonner';
 
 interface Product {
@@ -22,9 +22,9 @@ interface Product {
   updated_at: string;
 }
 
-const Admin = () => {
-  const { signOut, user, loading: authLoading } = useAuth();
-  const { products, loadingProducts, error, fetchProducts, deleteProduct } = useAdminProducts(authLoading, user);
+const AdminContent = () => {
+  const { signOut, user } = useAuth();
+  const { products, loadingProducts, error, fetchProducts, deleteProduct } = useAdminProducts();
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showForm, setShowForm] = useState(false);
 
@@ -61,11 +61,6 @@ const Admin = () => {
     setShowForm(false);
     setEditingProduct(null);
   };
-
-  // Mostrar loading enquanto autentica
-  if (authLoading) {
-    return <AdminLoadingScreen />;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -110,6 +105,14 @@ const Admin = () => {
         />
       </div>
     </div>
+  );
+};
+
+const Admin = () => {
+  return (
+    <ProtectedRoute requireAdmin={true}>
+      <AdminContent />
+    </ProtectedRoute>
   );
 };
 

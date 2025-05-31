@@ -56,17 +56,20 @@ export const useAuth = () => {
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          const profileData = await fetchProfile(session.user.id);
-          setProfile(profileData);
-          
-          // Atualizar last_login se necessário
-          if (event === 'SIGNED_IN' && profileData) {
-            supabase
-              .from('profiles')
-              .update({ last_login: new Date().toISOString() })
-              .eq('id', session.user.id)
-              .then(() => console.log('Last login updated'));
-          }
+          // Buscar profile apenas se o usuário estiver logado
+          setTimeout(async () => {
+            const profileData = await fetchProfile(session.user.id);
+            setProfile(profileData);
+            
+            // Atualizar last_login se necessário
+            if (event === 'SIGNED_IN' && profileData) {
+              supabase
+                .from('profiles')
+                .update({ last_login: new Date().toISOString() })
+                .eq('id', session.user.id)
+                .then(() => console.log('Last login updated'));
+            }
+          }, 0);
         } else {
           setProfile(null);
         }
