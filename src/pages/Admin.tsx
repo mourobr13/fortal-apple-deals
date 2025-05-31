@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { AdminProductForm } from '@/components/admin/AdminProductForm';
 import { AdminProductsList } from '@/components/admin/AdminProductsList';
-import { LogOut, Plus } from 'lucide-react';
+import { LogOut, Plus, RefreshCw, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Product {
@@ -27,10 +28,12 @@ const Admin = () => {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [loadingProducts, setLoadingProducts] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchProducts = async () => {
     console.log('Fetching products...');
     setLoadingProducts(true);
+    setError(null);
     
     try {
       const { data, error } = await supabase
@@ -40,15 +43,22 @@ const Admin = () => {
 
       if (error) {
         console.error('Error fetching products:', error);
+        setError('Erro ao carregar produtos: ' + error.message);
         toast.error('Erro ao carregar produtos');
         return;
       }
       
-      console.log('Products loaded:', data?.length);
+      console.log('Products loaded:', data?.length || 0);
       setProducts(data || []);
+      
+      if (data && data.length === 0) {
+        toast.info('Nenhum produto encontrado. Adicione o primeiro produto!');
+      }
     } catch (error: any) {
       console.error('Failed to fetch products:', error);
-      toast.error('Erro ao carregar produtos');
+      const errorMessage = 'Erro ao carregar produtos';
+      setError(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setLoadingProducts(false);
     }
@@ -74,7 +84,6 @@ const Admin = () => {
     fetchProducts();
     setShowForm(false);
     setEditingProduct(null);
-    toast.success('Produto salvo com sucesso!');
   };
 
   const handleEdit = (product: Product) => {
@@ -118,55 +127,88 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold">Painel Administrativo</h1>
-            <p className="text-gray-600 mt-1">Gerenciar produtos da loja</p>
+            <h1 className="text-3xl font-bold text-gray-900">Painel Administrativo</h1>
+            <p className="text-gray-600 mt-2">Gerenciar produtos da loja</p>
           </div>
-          <Button onClick={handleSignOut} variant="outline">
-            <LogOut className="h-4 w-4 mr-2" />
-            Sair
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              onClick={fetchProducts} 
+              variant="outline" 
+              disabled={loadingProducts}
+            >
+              <RefreshCw className={`h-4 w-4 mr-2 ${loadingProducts ? 'animate-spin' : ''}`} />
+              Atualizar
+            </Button>
+            <Button onClick={handleSignOut} variant="outline">
+              <LogOut className="h-4 w-4 mr-2" />
+              Sair
+            </Button>
+          </div>
         </div>
 
-        <div className="grid gap-6">
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-center">
-                <CardTitle>Produtos</CardTitle>
-                <Button onClick={handleAddNew} disabled={showForm}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Novo Produto
-                </Button>
+        {/* Error Alert */}
+        {error && (
+          <Alert className="mb-6 border-red-200 bg-red-50">
+            <AlertTriangle className="h-4 w-4 text-red-600" />
+            <AlertDescription className="text-red-800">
+              {error}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {/* Form Section */}
+        {showForm && (
+          <div className="mb-8">
+            <AdminProductForm
+              product={editingProduct}
+              onSave={handleProductSaved}
+              onCancel={handleCancelForm}
+            />
+          </div>
+        )}
+
+        {/* Products Section */}
+        <Card className="shadow-lg">
+          <CardHeader className="bg-white border-b">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+              <div>
+                <CardTitle className="text-xl">Produtos Cadastrados</CardTitle>
+                <p className="text-sm text-gray-600 mt-1">
+                  {products.length} produto{products.length !== 1 ? 's' : ''} cadastrado{products.length !== 1 ? 's' : ''}
+                </p>
               </div>
-            </CardHeader>
-            <CardContent>
-              {showForm && (
-                <div className="mb-6 p-4 border rounded-lg bg-white">
-                  <AdminProductForm
-                    product={editingProduct}
-                    onSave={handleProductSaved}
-                    onCancel={handleCancelForm}
-                  />
-                </div>
-              )}
-              
-              {loadingProducts ? (
-                <div className="text-center py-8">
-                  <div className="text-lg">Carregando produtos...</div>
-                </div>
-              ) : (
-                <AdminProductsList
-                  products={products}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                />
-              )}
-            </CardContent>
-          </Card>
-        </div>
+              <Button 
+                onClick={handleAddNew} 
+                disabled={showForm}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Novo Produto
+              </Button>
+            </div>
+          </CardHeader>
+          
+          <CardContent className="p-6">
+            {loadingProducts ? (
+              <div className="text-center py-12">
+                <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4 text-blue-600" />
+                <div className="text-lg font-medium">Carregando produtos...</div>
+                <div className="text-sm text-gray-500 mt-1">Por favor, aguarde</div>
+              </div>
+            ) : (
+              <AdminProductsList
+                products={products}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            )}
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

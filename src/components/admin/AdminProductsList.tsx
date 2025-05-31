@@ -2,7 +2,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Edit, Trash2, Eye } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Edit, Trash2, Package, Calendar } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -25,9 +26,12 @@ interface AdminProductsListProps {
 export const AdminProductsList = ({ products, onEdit, onDelete }: AdminProductsListProps) => {
   if (products.length === 0) {
     return (
-      <div className="text-center py-12">
-        <div className="text-gray-500 text-lg mb-2">Nenhum produto encontrado</div>
-        <div className="text-gray-400">Clique em "Novo Produto" para adicionar o primeiro produto</div>
+      <div className="text-center py-16">
+        <Package className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+        <div className="text-gray-500 text-xl mb-2 font-medium">Nenhum produto encontrado</div>
+        <div className="text-gray-400 text-base">
+          Clique em "Novo Produto" para adicionar o primeiro produto
+        </div>
       </div>
     );
   }
@@ -42,48 +46,57 @@ export const AdminProductsList = ({ products, onEdit, onDelete }: AdminProductsL
     });
   };
 
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(price);
+  };
+
   return (
-    <div className="space-y-4">
-      <div className="text-sm text-gray-600 mb-4">
-        {products.length} produto{products.length !== 1 ? 's' : ''} encontrado{products.length !== 1 ? 's' : ''}
-      </div>
-      
+    <div className="space-y-4">      
       {products.map((product) => (
-        <Card key={product.id} className="hover:shadow-md transition-shadow">
+        <Card key={product.id} className="hover:shadow-lg transition-all duration-200 border-l-4 border-l-blue-500">
           <CardContent className="p-6">
             <div className="flex gap-4">
+              {/* Product Image */}
               <div className="flex-shrink-0">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-20 h-20 object-cover rounded-lg border"
-                  onError={(e) => {
-                    e.currentTarget.src = '/placeholder.svg';
-                  }}
-                />
+                <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-gray-50">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-24 h-24 object-cover transition-transform hover:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.src = '/placeholder.svg';
+                    }}
+                  />
+                </div>
               </div>
               
+              {/* Product Info */}
               <div className="flex-1 min-w-0">
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h3 className="font-semibold text-lg text-gray-900 truncate">
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex-1 mr-4">
+                    <h3 className="font-semibold text-lg text-gray-900 truncate mb-1">
                       {product.name}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Badge variant="secondary" className="bg-blue-100 text-blue-800">
                         {product.category}
-                      </span>
-                      <span className="font-bold text-green-600 text-lg">
-                        ${product.price}
+                      </Badge>
+                      <span className="font-bold text-green-600 text-xl">
+                        {formatPrice(product.price)}
                       </span>
                     </div>
                   </div>
                   
+                  {/* Action Buttons */}
                   <div className="flex gap-2 flex-shrink-0">
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => onEdit(product)}
+                      className="hover:bg-blue-50 hover:border-blue-300"
                       title="Editar produto"
                     >
                       <Edit className="h-4 w-4" />
@@ -92,6 +105,7 @@ export const AdminProductsList = ({ products, onEdit, onDelete }: AdminProductsL
                       size="sm"
                       variant="destructive"
                       onClick={() => onDelete(product.id)}
+                      className="hover:bg-red-600"
                       title="Excluir produto"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -99,18 +113,24 @@ export const AdminProductsList = ({ products, onEdit, onDelete }: AdminProductsL
                   </div>
                 </div>
                 
+                {/* Description */}
                 {product.description && (
-                  <p className="text-sm text-gray-700 mb-2 line-clamp-2">
+                  <p className="text-sm text-gray-700 mb-3 line-clamp-2 leading-relaxed">
                     {product.description}
                   </p>
                 )}
                 
-                <div className="text-xs text-gray-500">
-                  Criado em: {formatDate(product.created_at)}
+                {/* Metadata */}
+                <div className="flex items-center gap-4 text-xs text-gray-500">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    <span>Criado: {formatDate(product.created_at)}</span>
+                  </div>
                   {product.updated_at !== product.created_at && (
-                    <span className="ml-2">
-                      • Atualizado em: {formatDate(product.updated_at)}
-                    </span>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-3 w-3" />
+                      <span>Atualizado: {formatDate(product.updated_at)}</span>
+                    </div>
                   )}
                 </div>
               </div>
