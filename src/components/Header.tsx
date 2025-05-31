@@ -4,7 +4,6 @@ import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
 
 export const Header = () => {
-  // ... keep existing code (state and functions) the same
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   
   const toggleMenu = () => {
@@ -13,7 +12,7 @@ export const Header = () => {
   
   const scrollToProducts = (e: React.MouseEvent) => {
     e.preventDefault();
-    const productsSection = document.querySelector('#products .text-3xl.md\\:text-4xl');
+    const productsSection = document.querySelector('#produtos');
     if (productsSection) {
       productsSection.scrollIntoView({
         behavior: 'smooth'
@@ -43,14 +42,14 @@ export const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-4">
-          <a href="#products" onClick={scrollToProducts} className="text-gray-800 hover:text-apple-blue transition-colors">
+          <a href="#produtos" onClick={scrollToProducts} className="text-gray-800 hover:text-apple-blue transition-colors">
             Produtos
           </a>
           <a href="#contact" className="text-gray-800 hover:text-apple-blue transition-colors">
             Contato
           </a>
           <Button asChild variant="default" className="bg-apple-blue hover:bg-apple-blue-dark">
-            <a href="#products" onClick={scrollToProducts}>Ver produtos</a>
+            <a href="#produtos" onClick={scrollToProducts}>Ver produtos</a>
           </Button>
           
           {/* WhatsApp Brasil */}
@@ -76,14 +75,14 @@ export const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white py-4 px-6 shadow-lg">
           <nav className="flex flex-col space-y-4">
-            <a href="#products" onClick={scrollToProducts} className="text-gray-800 hover:text-apple-blue transition-colors">
+            <a href="#produtos" onClick={scrollToProducts} className="text-gray-800 hover:text-apple-blue transition-colors">
               Produtos
             </a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-gray-800 hover:text-apple-blue transition-colors">
               Contato
             </a>
             <Button asChild variant="default" className="w-full bg-apple-blue hover:bg-apple-blue-dark">
-              <a href="#products" onClick={scrollToProducts}>Ver produtos</a>
+              <a href="#produtos" onClick={scrollToProducts}>Ver produtos</a>
             </Button>
             
             {/* WhatsApp Brasil - Mobile */}
