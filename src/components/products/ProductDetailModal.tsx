@@ -57,7 +57,6 @@ export const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailMo
                 <p className="text-sm text-blue-600 font-medium uppercase">
                   {product.category}
                 </p>
-                <h2 className="text-xl font-bold">{product.name}</h2>
               </div>
               <div className="text-right">
                 <p className="text-sm text-gray-500">A partir de</p>
