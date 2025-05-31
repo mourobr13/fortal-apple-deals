@@ -48,16 +48,13 @@ export const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailMo
           </div>
           
           <div className="space-y-3">
-            <div className="flex justify-between items-start">
-              <div>
-                <p className="text-sm text-blue-600 font-medium uppercase">
-                  {product.category}
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="text-sm text-gray-500">A partir de</p>
-                <p className="text-2xl font-bold text-blue-600">${product.price}</p>
-              </div>
+            <div className="text-center">
+              <h2 className="text-xl font-bold text-gray-900">{product.name}</h2>
+            </div>
+            
+            <div className="text-center">
+              <p className="text-sm text-gray-500">A partir de</p>
+              <p className="text-2xl font-bold text-blue-600">${product.price}</p>
             </div>
             
             {product.description && (
