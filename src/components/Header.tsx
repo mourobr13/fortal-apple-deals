@@ -10,6 +10,14 @@ export const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    setIsMenuOpen(false);
+  };
+  
   const scrollToProducts = (e: React.MouseEvent) => {
     e.preventDefault();
     const productsSection = document.querySelector('#produtos');
@@ -35,9 +43,11 @@ export const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
-      <div className="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-        <div>
-          <img src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png" alt="Fortaleza Solutions Logo" className="h-20 w-auto" draggable={false} />
+      <div className="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between md:justify-between">
+        <div className="flex-1 md:flex-none flex justify-center md:justify-start">
+          <button onClick={scrollToTop} className="focus:outline-none">
+            <img src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png" alt="Fortaleza Solutions Logo" className="h-20 w-auto" draggable={false} />
+          </button>
         </div>
 
         {/* Desktop Navigation */}
@@ -66,7 +76,7 @@ export const Header = () => {
         </nav>
 
         {/* Mobile Navigation Button */}
-        <button className="md:hidden" onClick={toggleMenu}>
+        <button className="md:hidden absolute right-4" onClick={toggleMenu}>
           {isMenuOpen ? <X className="h-6 w-6 text-gray-800" /> : <Menu className="h-6 w-6 text-gray-800" />}
         </button>
       </div>

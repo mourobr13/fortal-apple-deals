@@ -1,9 +1,19 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
+
 export const Footer = () => {
-  return <footer className="text-white py-12 bg-stone-900">
+  const scrollToCategory = (categoryId: string) => {
+    const element = document.querySelector(categoryId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <footer className="text-white py-12 bg-stone-900">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center mb-4">
               <img src="/lovable-uploads/9ec4aa47-15ef-41a2-a5ac-feeb8bdf9c48.png" alt="Fortaleza Solutions" className="h-16 w-auto" />
@@ -16,21 +26,31 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Produtos</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#iphones" className="hover:text-white transition-colors">iPhones</a></li>
-              <li><a href="#ipads" className="hover:text-white transition-colors">iPads</a></li>
-              <li><a href="#macbooks" className="hover:text-white transition-colors">MacBooks</a></li>
-              <li><a href="#watches" className="hover:text-white transition-colors">Apple Watch</a></li>
-              <li><a href="#airpods" className="hover:text-white transition-colors">AirPods</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-semibold mb-4">Suporte</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Atendimento</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Garantia</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Trocas</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+              <li>
+                <button onClick={() => scrollToCategory('#iphones')} className="hover:text-white transition-colors text-left">
+                  iPhones
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToCategory('#ipads')} className="hover:text-white transition-colors text-left">
+                  iPads
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToCategory('#macbooks')} className="hover:text-white transition-colors text-left">
+                  MacBooks
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToCategory('#watches')} className="hover:text-white transition-colors text-left">
+                  Apple Watch
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToCategory('#airpods')} className="hover:text-white transition-colors text-left">
+                  AirPods
+                </button>
+              </li>
             </ul>
           </div>
           
@@ -53,5 +73,6 @@ export const Footer = () => {
           <p>&copy; 2024 Fortaleza Solutions. Todos os direitos reservados.</p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
