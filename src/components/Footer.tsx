@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -10,9 +9,9 @@ export const Footer = () => {
           <div>
             <div className="flex items-center mb-4">
               <img 
-                src="/lovable-uploads/fortaleza-logo-footer.png" 
+                src="/lovable-uploads/9ec4aa47-15ef-41a2-a5ac-feeb8bdf9c48.png" 
                 alt="Fortaleza Solutions" 
-                className="h-8 w-auto"
+                className="h-16 w-auto"
               />
             </div>
             <p className="text-gray-400 text-sm">

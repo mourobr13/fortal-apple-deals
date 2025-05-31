@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useAdminProducts } from '@/hooks/useAdminProducts';
@@ -80,9 +79,9 @@ const AdminContent = () => {
         {/* Logo Section */}
         <div className="flex justify-center mb-6">
           <img 
-            src="/lovable-uploads/fortaleza-logo-footer.png" 
+            src="/lovable-uploads/a41a14b0-06c5-4ade-aa43-cdb1cbe22d18.png" 
             alt="Fortaleza Logo" 
-            className="h-16 w-auto"
+            className="h-20 w-auto"
           />
         </div>
 
