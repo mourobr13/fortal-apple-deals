@@ -45,7 +45,6 @@ const Admin = () => {
       });
       
       console.log('🔗 Fazendo query para products...');
-      console.log('🌐 URL Supabase:', supabase.supabaseUrl);
       
       const { data, error, status, statusText } = await supabase
         .from('products')
