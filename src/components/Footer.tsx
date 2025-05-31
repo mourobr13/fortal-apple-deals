@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -14,11 +13,11 @@ export const Footer = () => {
     <footer className="text-white py-12 bg-stone-900">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <div className="flex items-center mb-4">
-              <img src="/lovable-uploads/9ec4aa47-15ef-41a2-a5ac-feeb8bdf9c48.png" alt="Fortaleza Solutions" className="h-16 w-auto" />
+              <img src="/lovable-uploads/fortaleza-logo-footer.png" alt="Fortaleza Solutions" className="h-16 w-auto" />
             </div>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm text-center md:text-left">
               Sua loja especializada em produtos Apple. Qualidade e inovação em cada produto.
             </p>
           </div>
