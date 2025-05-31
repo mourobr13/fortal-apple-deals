@@ -5,8 +5,8 @@ import { useAdminProducts } from '@/hooks/useAdminProducts';
 import { AdminProductForm } from '@/components/admin/AdminProductForm';
 import { AdminHeader } from '@/components/admin/AdminHeader';
 import { AdminErrorAlert } from '@/components/admin/AdminErrorAlert';
-import { AdminDebugInfo } from '@/components/admin/AdminDebugInfo';
 import { AdminProductsSection } from '@/components/admin/AdminProductsSection';
+import { ProductEditDialog } from '@/components/admin/ProductEditDialog';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { toast } from 'sonner';
 
@@ -28,6 +28,7 @@ const AdminContent = () => {
   const { products, loadingProducts, error, fetchProducts, deleteProduct, toggleProductActive } = useAdminProducts();
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -50,7 +51,7 @@ const AdminContent = () => {
   const handleEdit = (product: Product) => {
     console.log('✏️ Editando produto:', product.name);
     setEditingProduct(product);
-    setShowForm(true);
+    setIsEditDialogOpen(true);
   };
 
   const handleAddNew = () => {
@@ -60,6 +61,16 @@ const AdminContent = () => {
 
   const handleCancelForm = () => {
     setShowForm(false);
+    setEditingProduct(null);
+  };
+
+  const handleEditDialogSave = () => {
+    console.log('🔄 Produto salvo via dialog, recarregando lista...');
+    fetchProducts();
+  };
+
+  const handleEditDialogClose = () => {
+    setIsEditDialogOpen(false);
     setEditingProduct(null);
   };
 
@@ -100,11 +111,11 @@ const AdminContent = () => {
           onToggleActive={toggleProductActive}
         />
 
-        {/* Debug info movido para o final */}
-        <AdminDebugInfo
-          isAuthenticated={!!user}
-          productsCount={products.length}
-          isLoading={loadingProducts}
+        <ProductEditDialog
+          product={editingProduct}
+          isOpen={isEditDialogOpen}
+          onClose={handleEditDialogClose}
+          onSave={handleEditDialogSave}
         />
       </div>
     </div>
