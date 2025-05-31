@@ -15,6 +15,7 @@ interface Product {
   details: string | null;
   created_at: string;
   updated_at: string;
+  is_active: boolean;
 }
 
 interface AdminProductsSectionProps {
@@ -24,6 +25,7 @@ interface AdminProductsSectionProps {
   onAddNew: () => void;
   onEdit: (product: Product) => void;
   onDelete: (id: string) => void;
+  onToggleActive: (id: string, currentStatus: boolean) => void;
 }
 
 export const AdminProductsSection = ({ 
@@ -32,7 +34,8 @@ export const AdminProductsSection = ({
   showForm, 
   onAddNew, 
   onEdit, 
-  onDelete 
+  onDelete,
+  onToggleActive
 }: AdminProductsSectionProps) => {
   return (
     <Card className="shadow-lg">
@@ -67,6 +70,7 @@ export const AdminProductsSection = ({
             products={products}
             onEdit={onEdit}
             onDelete={onDelete}
+            onToggleActive={onToggleActive}
           />
         )}
       </CardContent>

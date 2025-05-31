@@ -13,6 +13,7 @@ interface Product {
   details: string | null;
   created_at: string;
   updated_at: string;
+  is_active: boolean;
 }
 
 export const useAdminProducts = () => {
@@ -26,7 +27,6 @@ export const useAdminProducts = () => {
     setError(null);
     
     try {
-      // Verificar se há sessão ativa
       const { data: { session }, error: sessionError } = await supabase.auth.getSession();
       console.log('📝 Sessão atual:', {
         hasSession: !!session,
@@ -118,7 +118,28 @@ export const useAdminProducts = () => {
     }
   };
 
-  // Carregar produtos quando o hook é inicializado
+  const toggleProductActive = async (id: string, currentStatus: boolean) => {
+    console.log('🔄 Alterando status do produto:', id, 'de', currentStatus, 'para', !currentStatus);
+    
+    try {
+      const { error } = await supabase
+        .from('products')
+        .update({ is_active: !currentStatus })
+        .eq('id', id);
+
+      if (error) {
+        console.error('❌ Erro ao atualizar status:', error);
+        throw error;
+      }
+      
+      toast.success(`Produto ${!currentStatus ? 'ativado' : 'desativado'} com sucesso!`);
+      fetchProducts();
+    } catch (error: any) {
+      console.error('💥 Falha ao atualizar status do produto:', error);
+      toast.error('Erro ao atualizar status: ' + error.message);
+    }
+  };
+
   useEffect(() => {
     console.log('🚀 useAdminProducts inicializado, carregando produtos...');
     fetchProducts();
@@ -129,6 +150,7 @@ export const useAdminProducts = () => {
     loadingProducts,
     error,
     fetchProducts,
-    deleteProduct
+    deleteProduct,
+    toggleProductActive
   };
 };

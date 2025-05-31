@@ -20,11 +20,12 @@ interface Product {
   details: string | null;
   created_at: string;
   updated_at: string;
+  is_active: boolean;
 }
 
 const AdminContent = () => {
   const { signOut, user } = useAuth();
-  const { products, loadingProducts, error, fetchProducts, deleteProduct } = useAdminProducts();
+  const { products, loadingProducts, error, fetchProducts, deleteProduct, toggleProductActive } = useAdminProducts();
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showForm, setShowForm] = useState(false);
 
@@ -79,12 +80,6 @@ const AdminContent = () => {
           />
         )}
 
-        <AdminDebugInfo
-          isAuthenticated={!!user}
-          productsCount={products.length}
-          isLoading={loadingProducts}
-        />
-
         {showForm && (
           <div className="mb-8">
             <AdminProductForm
@@ -102,6 +97,14 @@ const AdminContent = () => {
           onAddNew={handleAddNew}
           onEdit={handleEdit}
           onDelete={deleteProduct}
+          onToggleActive={toggleProductActive}
+        />
+
+        {/* Debug info movido para o final */}
+        <AdminDebugInfo
+          isAuthenticated={!!user}
+          productsCount={products.length}
+          isLoading={loadingProducts}
         />
       </div>
     </div>
