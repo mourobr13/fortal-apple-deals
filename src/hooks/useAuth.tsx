@@ -29,21 +29,23 @@ export const useAuth = () => {
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          // Fetch user profile
+          // Fetch user profile with all fields
           const { data: profileData } = await supabase
             .from('profiles')
-            .select('*')
+            .select('id, email, role, full_name, phone, is_active, last_login, created_at, updated_at')
             .eq('id', session.user.id)
             .single();
           
-          setProfile(profileData);
+          if (profileData) {
+            setProfile(profileData as Profile);
 
-          // Update last_login if user just signed in
-          if (event === 'SIGNED_IN') {
-            await supabase
-              .from('profiles')
-              .update({ last_login: new Date().toISOString() })
-              .eq('id', session.user.id);
+            // Update last_login if user just signed in
+            if (event === 'SIGNED_IN') {
+              await supabase
+                .from('profiles')
+                .update({ last_login: new Date().toISOString() })
+                .eq('id', session.user.id);
+            }
           }
         } else {
           setProfile(null);
@@ -54,9 +56,23 @@ export const useAuth = () => {
     );
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        // Fetch user profile for existing session
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('id, email, role, full_name, phone, is_active, last_login, created_at, updated_at')
+          .eq('id', session.user.id)
+          .single();
+          
+        if (profileData) {
+          setProfile(profileData as Profile);
+        }
+      }
+      
       setLoading(false);
     });
 
