@@ -28,21 +28,33 @@ const Admin = () => {
   const [loadingProducts, setLoadingProducts] = useState(true);
 
   useEffect(() => {
-    if (isAdmin) {
+    // Only fetch products once when component mounts and user is authenticated
+    if (!loading && user && isAdmin) {
       fetchProducts();
+    } else if (!loading && (!user || !isAdmin)) {
+      // If not loading and user is not admin, stop the loading state
+      setLoadingProducts(false);
     }
-  }, [isAdmin]);
+  }, [loading, user, isAdmin]); // Remove fetchProducts from dependencies
 
   const fetchProducts = async () => {
+    console.log('Fetching products...');
     try {
+      setLoadingProducts(true);
       const { data, error } = await supabase
         .from('products')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching products:', error);
+        throw error;
+      }
+      
+      console.log('Products fetched successfully:', data);
       setProducts(data || []);
     } catch (error: any) {
+      console.error('Failed to fetch products:', error);
       toast.error('Erro ao carregar produtos');
     } finally {
       setLoadingProducts(false);
@@ -86,17 +98,27 @@ const Admin = () => {
     }
   };
 
+  console.log('Admin component state:', { 
+    loading, 
+    user: !!user, 
+    isAdmin, 
+    loadingProducts,
+    productsCount: products.length 
+  });
+
   // Show loading state while checking auth
-  if (loading || loadingProducts) {
+  if (loading) {
+    console.log('Auth still loading...');
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-lg">Carregando...</div>
+        <div className="text-lg">Verificando autenticação...</div>
       </div>
     );
   }
 
   // Redirect if not admin - moved after all hooks
   if (!user || !isAdmin) {
+    console.log('Redirecting to auth - user:', !!user, 'isAdmin:', isAdmin);
     return <Navigate to="/auth" replace />;
   }
 
@@ -139,11 +161,17 @@ const Admin = () => {
                 </div>
               )}
               
-              <ProductsList
-                products={products}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-              />
+              {loadingProducts ? (
+                <div className="text-center py-8">
+                  <div className="text-lg">Carregando produtos...</div>
+                </div>
+              ) : (
+                <ProductsList
+                  products={products}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              )}
             </CardContent>
           </Card>
         </div>
