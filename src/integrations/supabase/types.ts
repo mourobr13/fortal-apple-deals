@@ -49,20 +49,35 @@ export type Database = {
         Row: {
           created_at: string
           email: string | null
+          full_name: string | null
           id: string
+          is_active: boolean | null
+          last_login: string | null
+          phone: string | null
           role: string | null
+          updated_at: string | null
         }
         Insert: {
           created_at?: string
           email?: string | null
+          full_name?: string | null
           id: string
+          is_active?: boolean | null
+          last_login?: string | null
+          phone?: string | null
           role?: string | null
+          updated_at?: string | null
         }
         Update: {
           created_at?: string
           email?: string | null
+          full_name?: string | null
           id?: string
+          is_active?: boolean | null
+          last_login?: string | null
+          phone?: string | null
           role?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
