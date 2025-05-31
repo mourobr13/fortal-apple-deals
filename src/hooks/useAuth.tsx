@@ -7,6 +7,12 @@ interface Profile {
   id: string;
   email: string | null;
   role: string;
+  full_name: string | null;
+  phone: string | null;
+  is_active: boolean;
+  last_login: string | null;
+  created_at: string;
+  updated_at: string | null;
 }
 
 export const useAuth = () => {
@@ -31,6 +37,14 @@ export const useAuth = () => {
             .single();
           
           setProfile(profileData);
+
+          // Update last_login if user just signed in
+          if (event === 'SIGNED_IN') {
+            await supabase
+              .from('profiles')
+              .update({ last_login: new Date().toISOString() })
+              .eq('id', session.user.id);
+          }
         } else {
           setProfile(null);
         }
@@ -57,10 +71,15 @@ export const useAuth = () => {
     return { data, error };
   };
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, fullName?: string) => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: fullName || ''
+        }
+      }
     });
     return { data, error };
   };
@@ -68,6 +87,23 @@ export const useAuth = () => {
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     return { error };
+  };
+
+  const updateProfile = async (updates: Partial<Profile>) => {
+    if (!user) return { error: new Error('Usuário não autenticado') };
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .update(updates)
+      .eq('id', user.id)
+      .select()
+      .single();
+
+    if (data && !error) {
+      setProfile(data);
+    }
+
+    return { data, error };
   };
 
   return {
@@ -78,6 +114,8 @@ export const useAuth = () => {
     signIn,
     signUp,
     signOut,
-    isAdmin: profile?.role === 'admin'
+    updateProfile,
+    isAdmin: profile?.role === 'admin',
+    isActive: profile?.is_active ?? false
   };
 };
