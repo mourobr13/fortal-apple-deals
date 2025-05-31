@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,7 +23,7 @@ interface Product {
 }
 
 const Admin = () => {
-  const { signOut } = useAuth();
+  const { signOut, user, loading: authLoading } = useAuth();
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showForm, setShowForm] = useState(false);
@@ -37,36 +38,65 @@ const Admin = () => {
     try {
       // Verificar se há sessão ativa
       const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-      console.log('📝 Sessão atual:', !!session, sessionError);
+      console.log('📝 Sessão atual:', {
+        hasSession: !!session,
+        hasUser: !!session?.user,
+        sessionError: sessionError?.message || 'nenhum erro'
+      });
       
       console.log('🔗 Fazendo query para products...');
-      const { data, error } = await supabase
+      console.log('🌐 URL Supabase:', supabase.supabaseUrl);
+      
+      const { data, error, status, statusText } = await supabase
         .from('products')
         .select('*')
         .order('created_at', { ascending: false });
 
       console.log('📊 Resultado da query:', { 
-        data: data ? `${data.length} produtos` : 'null', 
-        error: error ? error.message : 'sem erro' 
+        data: data ? `${data.length} produtos encontrados` : 'data é null',
+        error: error ? `${error.code}: ${error.message}` : 'sem erro',
+        status: status,
+        statusText: statusText
       });
 
       if (error) {
-        console.error('❌ Erro ao buscar produtos:', error);
-        setError('Erro ao carregar produtos: ' + error.message);
-        toast.error('Erro ao carregar produtos: ' + error.message);
+        console.error('❌ Erro detalhado:', {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+          hint: error.hint
+        });
+        
+        const errorMessage = `Erro ao carregar produtos: ${error.message} (Código: ${error.code})`;
+        setError(errorMessage);
+        toast.error(errorMessage);
         return;
       }
       
-      console.log('✅ Produtos carregados com sucesso:', data?.length || 0);
-      setProducts(data || []);
+      if (!data) {
+        console.log('⚠️ Data é null mas sem erro');
+        setProducts([]);
+        toast.info('Nenhum produto encontrado no banco de dados');
+        return;
+      }
       
-      if (data && data.length === 0) {
-        console.log('ℹ️ Nenhum produto encontrado no banco');
+      console.log('✅ Produtos carregados com sucesso:', data.length);
+      console.log('📦 Dados dos produtos:', data);
+      setProducts(data);
+      
+      if (data.length === 0) {
+        console.log('ℹ️ Array vazio - nenhum produto cadastrado');
         toast.info('Nenhum produto encontrado. Adicione o primeiro produto!');
+      } else {
+        toast.success(`${data.length} produto(s) carregado(s) com sucesso!`);
       }
     } catch (error: any) {
-      console.error('💥 Erro inesperado ao buscar produtos:', error);
-      const errorMessage = 'Erro ao carregar produtos: ' + error.message;
+      console.error('💥 Erro inesperado ao buscar produtos:', {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      });
+      const errorMessage = `Erro inesperado: ${error.message}`;
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {
@@ -75,11 +105,22 @@ const Admin = () => {
     }
   };
 
-  // Carregar produtos quando component montar
+  // Aguardar autenticação antes de carregar produtos
   useEffect(() => {
-    console.log('🚀 Admin component montado, iniciando busca de produtos...');
+    if (authLoading) {
+      console.log('⏳ Aguardando autenticação...');
+      return;
+    }
+    
+    console.log('🚀 Admin component pronto, iniciando busca de produtos...');
+    console.log('👤 Estado do usuário:', { 
+      hasUser: !!user, 
+      userId: user?.id,
+      userEmail: user?.email 
+    });
+    
     fetchProducts();
-  }, []);
+  }, [authLoading, user]);
 
   const handleSignOut = async () => {
     try {
@@ -93,6 +134,7 @@ const Admin = () => {
   };
 
   const handleProductSaved = () => {
+    console.log('🔄 Produto salvo, recarregando lista...');
     fetchProducts();
     setShowForm(false);
     setEditingProduct(null);
@@ -138,6 +180,18 @@ const Admin = () => {
     setEditingProduct(null);
   };
 
+  // Mostrar loading enquanto autentica
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4 text-blue-600" />
+          <div className="text-lg font-medium">Verificando autenticação...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 py-6">
@@ -146,6 +200,11 @@ const Admin = () => {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Painel Administrativo</h1>
             <p className="text-gray-600 mt-2">Gerenciar produtos da loja</p>
+            {user && (
+              <p className="text-sm text-gray-500 mt-1">
+                Logado como: {user.email}
+              </p>
+            )}
           </div>
           <div className="flex gap-2">
             <Button 
@@ -168,10 +227,44 @@ const Admin = () => {
           <Alert className="mb-6 border-red-200 bg-red-50">
             <AlertTriangle className="h-4 w-4 text-red-600" />
             <AlertDescription className="text-red-800">
+              <div className="font-medium mb-1">Erro detectado:</div>
               {error}
+              <div className="mt-2">
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={fetchProducts}
+                  className="text-xs"
+                >
+                  Tentar novamente
+                </Button>
+              </div>
             </AlertDescription>
           </Alert>
         )}
+
+        {/* Debug Info */}
+        <Card className="mb-6 bg-blue-50 border-blue-200">
+          <CardContent className="p-4">
+            <div className="text-sm text-blue-800">
+              <div className="font-medium mb-2">🔍 Informações de Debug:</div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div>
+                  <strong>Autenticação:</strong> {user ? 'Logado' : 'Não logado'}
+                </div>
+                <div>
+                  <strong>Produtos:</strong> {products.length} carregados
+                </div>
+                <div>
+                  <strong>Status:</strong> {loadingProducts ? 'Carregando...' : 'Pronto'}
+                </div>
+              </div>
+              <div className="mt-2 text-xs text-blue-600">
+                Abra o Console do navegador (F12) para ver logs detalhados
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Form Section */}
         {showForm && (
