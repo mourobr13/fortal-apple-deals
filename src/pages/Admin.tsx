@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -31,41 +30,54 @@ const Admin = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchProducts = async () => {
-    console.log('Fetching products...');
+    console.log('🔍 Iniciando busca de produtos...');
     setLoadingProducts(true);
     setError(null);
     
     try {
+      // Verificar se há sessão ativa
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      console.log('📝 Sessão atual:', !!session, sessionError);
+      
+      console.log('🔗 Fazendo query para products...');
       const { data, error } = await supabase
         .from('products')
         .select('*')
         .order('created_at', { ascending: false });
 
+      console.log('📊 Resultado da query:', { 
+        data: data ? `${data.length} produtos` : 'null', 
+        error: error ? error.message : 'sem erro' 
+      });
+
       if (error) {
-        console.error('Error fetching products:', error);
+        console.error('❌ Erro ao buscar produtos:', error);
         setError('Erro ao carregar produtos: ' + error.message);
-        toast.error('Erro ao carregar produtos');
+        toast.error('Erro ao carregar produtos: ' + error.message);
         return;
       }
       
-      console.log('Products loaded:', data?.length || 0);
+      console.log('✅ Produtos carregados com sucesso:', data?.length || 0);
       setProducts(data || []);
       
       if (data && data.length === 0) {
+        console.log('ℹ️ Nenhum produto encontrado no banco');
         toast.info('Nenhum produto encontrado. Adicione o primeiro produto!');
       }
     } catch (error: any) {
-      console.error('Failed to fetch products:', error);
-      const errorMessage = 'Erro ao carregar produtos';
+      console.error('💥 Erro inesperado ao buscar produtos:', error);
+      const errorMessage = 'Erro ao carregar produtos: ' + error.message;
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {
       setLoadingProducts(false);
+      console.log('🏁 Busca de produtos finalizada');
     }
   };
 
   // Carregar produtos quando component montar
   useEffect(() => {
+    console.log('🚀 Admin component montado, iniciando busca de produtos...');
     fetchProducts();
   }, []);
 
@@ -87,7 +99,7 @@ const Admin = () => {
   };
 
   const handleEdit = (product: Product) => {
-    console.log('Editing product:', product.name);
+    console.log('✏️ Editando produto:', product.name);
     setEditingProduct(product);
     setShowForm(true);
   };
@@ -95,7 +107,7 @@ const Admin = () => {
   const handleDelete = async (id: string) => {
     if (!confirm('Tem certeza que deseja excluir este produto?')) return;
 
-    console.log('Deleting product:', id);
+    console.log('🗑️ Deletando produto:', id);
     
     try {
       const { error } = await supabase
@@ -104,15 +116,15 @@ const Admin = () => {
         .eq('id', id);
 
       if (error) {
-        console.error('Delete error:', error);
+        console.error('❌ Erro ao deletar:', error);
         throw error;
       }
       
       toast.success('Produto excluído com sucesso!');
       fetchProducts();
     } catch (error: any) {
-      console.error('Failed to delete product:', error);
-      toast.error('Erro ao excluir produto');
+      console.error('💥 Falha ao deletar produto:', error);
+      toast.error('Erro ao excluir produto: ' + error.message);
     }
   };
 
