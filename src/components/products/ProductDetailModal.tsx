@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart, X } from 'lucide-react';
 
@@ -38,10 +38,6 @@ export const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailMo
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold">{product.name}</DialogTitle>
-        </DialogHeader>
-        
         <div className="grid gap-4">
           <div className="w-full max-w-sm mx-auto bg-gray-100 rounded-lg overflow-hidden">
             <img 
