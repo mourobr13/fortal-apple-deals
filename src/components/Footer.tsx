@@ -1,18 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 export const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-white py-12">
+  return <footer className="text-white py-12 bg-stone-900">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <img 
-                src="/lovable-uploads/9ec4aa47-15ef-41a2-a5ac-feeb8bdf9c48.png" 
-                alt="Fortaleza Solutions" 
-                className="h-16 w-auto"
-              />
+              <img src="/lovable-uploads/9ec4aa47-15ef-41a2-a5ac-feeb8bdf9c48.png" alt="Fortaleza Solutions" className="h-16 w-auto" />
             </div>
             <p className="text-gray-400 text-sm">
               Sua loja especializada em produtos Apple. Qualidade e inovação em cada produto.
@@ -47,10 +41,7 @@ export const Footer = () => {
               <li>Email: contato@fortaleza.com</li>
               <li>Segunda a Sexta: 9h às 18h</li>
               <li>
-                <Link 
-                  to="/auth" 
-                  className="hover:text-white transition-colors text-blue-400"
-                >
+                <Link to="/auth" className="hover:text-white transition-colors text-blue-400">
                   Área Administrativa
                 </Link>
               </li>
@@ -62,6 +53,5 @@ export const Footer = () => {
           <p>&copy; 2024 Fortaleza Solutions. Todos os direitos reservados.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
