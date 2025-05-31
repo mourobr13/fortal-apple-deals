@@ -77,6 +77,15 @@ const AdminContent = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Logo Section */}
+        <div className="flex justify-center mb-6">
+          <img 
+            src="/lovable-uploads/fortaleza-logo-footer.png" 
+            alt="Fortaleza Logo" 
+            className="h-16 w-auto"
+          />
+        </div>
+
         <AdminHeader
           userEmail={user?.email}
           onSignOut={handleSignOut}

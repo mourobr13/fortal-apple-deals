@@ -23,9 +23,15 @@ interface ProductDetailModalProps {
 export const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailModalProps) => {
   if (!product) return null;
 
-  const handleBuyClick = () => {
+  const handleBuyClickBR = () => {
     const message = `Olá, estou interessado(a) no produto: ${product.name} por $${product.price}. Gostaria de mais informações para realizar a compra.`;
     const whatsappLink = `https://wa.me/5585997131313?text=${encodeURIComponent(message)}`;
+    window.open(whatsappLink, "_blank");
+  };
+
+  const handleBuyClickUSA = () => {
+    const message = `Olá, estou interessado(a) no produto: ${product.name} por $${product.price}. Gostaria de mais informações para realizar a compra.`;
+    const whatsappLink = `https://wa.me/14077576972?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };
 
@@ -37,11 +43,11 @@ export const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailMo
         </DialogHeader>
         
         <div className="grid gap-6">
-          <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+          <div className="w-full max-w-md mx-auto bg-gray-100 rounded-lg overflow-hidden">
             <img 
               src={product.image} 
               alt={product.name}
-              className="w-full h-full object-contain"
+              className="w-full h-64 object-contain"
             />
           </div>
           
@@ -73,21 +79,35 @@ export const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailMo
               </div>
             )}
             
-            <div className="flex gap-3 pt-4">
+            <div className="space-y-3 pt-4">
               <Button
-                onClick={handleBuyClick}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+                onClick={handleBuyClickBR}
+                className="w-full bg-green-600 hover:bg-green-700 text-white"
                 size="lg"
               >
+                <img src="/lovable-uploads/0bd28f91-d412-4642-ab16-b99584d04c01.png" alt="Brasil" className="w-4 h-4 mr-2" />
                 <ShoppingCart className="h-5 w-5 mr-2" />
-                Comprar no WhatsApp
+                Whatsapp BR
               </Button>
+              
+              <Button
+                onClick={handleBuyClickUSA}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                size="lg"
+              >
+                <img src="/lovable-uploads/021b6702-bcbd-47bd-bea1-17cba1b827cd.png" alt="EUA" className="w-4 h-4 mr-2" />
+                <ShoppingCart className="h-5 w-5 mr-2" />
+                Whatsapp EUA
+              </Button>
+
               <Button
                 onClick={onClose}
                 variant="outline"
                 size="lg"
+                className="w-full"
               >
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5 mr-2" />
+                Fechar
               </Button>
             </div>
           </div>
