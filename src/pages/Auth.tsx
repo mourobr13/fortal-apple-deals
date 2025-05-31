@@ -1,6 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,37 +11,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { user, isAdmin, signIn, loading: authLoading } = useAuth();
-
-  // Redirect if already logged in
-  useEffect(() => {
-    if (user && !authLoading) {
-      // Redirect admin users to admin panel, others to home
-      if (isAdmin) {
-        window.location.href = '/admin';
-      } else {
-        window.location.href = '/';
-      }
-    }
-  }, [user, isAdmin, authLoading]);
-
-  // Show loading while auth is being checked
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-lg">Verificando autenticação...</div>
-      </div>
-    );
-  }
-
-  // If user is already logged in, prevent showing the form while redirecting
-  if (user) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-lg">Redirecionando...</div>
-      </div>
-    );
-  }
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,8 +20,10 @@ const Auth = () => {
     try {
       const { error } = await signIn(email, password);
       if (error) throw error;
+      
       toast.success('Login realizado com sucesso!');
-      // Redirection will be handled by useEffect
+      // Redirecionar direto para admin após login bem-sucedido
+      window.location.href = '/admin';
     } catch (error: any) {
       toast.error(error.message || 'Erro ao fazer login');
     } finally {

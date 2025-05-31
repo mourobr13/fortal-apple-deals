@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
@@ -23,33 +22,11 @@ interface Product {
 }
 
 const Admin = () => {
-  const { user, isAdmin, signOut, loading: authLoading } = useAuth();
+  const { signOut } = useAuth();
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [loadingProducts, setLoadingProducts] = useState(false);
-
-  console.log('Admin page - Auth state:', { 
-    user: !!user, 
-    isAdmin, 
-    authLoading,
-    userEmail: user?.email 
-  });
-
-  // Redirect se não for admin
-  if (!authLoading && (!user || !isAdmin)) {
-    console.log('Redirecting to auth - not admin');
-    return <Navigate to="/auth" replace />;
-  }
-
-  // Mostrar loading enquanto verifica autenticação
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-lg">Verificando autenticação...</div>
-      </div>
-    );
-  }
 
   const fetchProducts = async () => {
     console.log('Fetching products...');
@@ -79,15 +56,14 @@ const Admin = () => {
 
   // Carregar produtos quando component montar
   useEffect(() => {
-    if (user && isAdmin) {
-      fetchProducts();
-    }
-  }, [user, isAdmin]);
+    fetchProducts();
+  }, []);
 
   const handleSignOut = async () => {
     try {
       await signOut();
       toast.success('Logout realizado com sucesso!');
+      window.location.href = '/auth';
     } catch (error: any) {
       console.error('Logout error:', error);
       toast.error('Erro ao fazer logout');
