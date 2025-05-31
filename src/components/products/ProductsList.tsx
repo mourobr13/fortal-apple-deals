@@ -11,6 +11,7 @@ interface Product {
   category: string;
   description: string | null;
   details: string | null;
+  is_active?: boolean;
 }
 
 interface ProductsListProps {
@@ -31,13 +32,16 @@ export const ProductsList = ({ products }: ProductsListProps) => {
     setSelectedProduct(null);
   };
 
-  // Determine the grid layout based on the number of products
-  const gridCols = products.length <= 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+  // Filter only active products for the main site
+  const activeProducts = products.filter(product => product.is_active !== false);
+
+  // Determine the grid layout based on the number of active products
+  const gridCols = activeProducts.length <= 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
   
   return (
     <>
       <div className={`grid ${gridCols} gap-6`}>
-        {products.map((product) => (
+        {activeProducts.map((product) => (
           <ProductCard
             key={product.id}
             name={product.name}
