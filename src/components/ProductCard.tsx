@@ -28,7 +28,7 @@ export const ProductCard = ({ name, price, image, category }: ProductCardProps) 
             <h3 className="font-semibold text-xl">{name}</h3>
           </div>
           <div className="text-right">
-            <p className="text-sm text-gray-500 mb-1">À partir de</p>
+            <p className="text-sm text-gray-500 mb-1">valor:</p>
             <p className="font-bold text-xl">${price}</p>
           </div>
         </div>
