@@ -64,11 +64,61 @@ export const AdminProductForm = ({ product, onSave, onCancel }: AdminProductForm
     }
   }, [product]);
 
+  const validateForm = () => {
+    // Required field validation
+    if (!formData.name.trim()) {
+      toast.error('Nome do produto é obrigatório');
+      return false;
+    }
+    if (!formData.price) {
+      toast.error('Preço é obrigatório');
+      return false;
+    }
+    if (!formData.category) {
+      toast.error('Categoria é obrigatória');
+      return false;
+    }
+    if (!formData.image) {
+      toast.error('Imagem é obrigatória');
+      return false;
+    }
+
+    // Length validation
+    if (formData.name.trim().length > 200) {
+      toast.error('Nome do produto deve ter no máximo 200 caracteres');
+      return false;
+    }
+    if (formData.description && formData.description.length > 1000) {
+      toast.error('Descrição deve ter no máximo 1000 caracteres');
+      return false;
+    }
+    if (formData.details && formData.details.length > 2000) {
+      toast.error('Detalhes devem ter no máximo 2000 caracteres');
+      return false;
+    }
+
+    // Price validation
+    const price = parseFloat(formData.price);
+    if (isNaN(price) || price <= 0) {
+      toast.error('Preço deve ser um número positivo');
+      return false;
+    }
+
+    // URL validation for image
+    try {
+      new URL(formData.image);
+    } catch {
+      toast.error('URL da imagem inválida');
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name.trim() || !formData.price || !formData.category || !formData.image) {
-      toast.error('Por favor, preencha todos os campos obrigatórios');
+    if (!validateForm()) {
       return;
     }
 
@@ -148,6 +198,7 @@ export const AdminProductForm = ({ product, onSave, onCancel }: AdminProductForm
                     placeholder="Ex: iPhone 15 Pro"
                     className="mt-1"
                     required
+                    maxLength={200}
                   />
                 </div>
                 
@@ -201,6 +252,7 @@ export const AdminProductForm = ({ product, onSave, onCancel }: AdminProductForm
                   placeholder="Descrição breve do produto..."
                   rows={3}
                   className="mt-1"
+                  maxLength={1000}
                 />
               </div>
             </TabsContent>
@@ -241,6 +293,7 @@ export const AdminProductForm = ({ product, onSave, onCancel }: AdminProductForm
                   placeholder="Especificações técnicas detalhadas..."
                   rows={6}
                   className="mt-1"
+                  maxLength={2000}
                 />
               </div>
             </TabsContent>

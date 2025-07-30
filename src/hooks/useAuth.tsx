@@ -119,10 +119,13 @@ export const useAuth = () => {
   const signUp = async (email: string, password: string, fullName?: string) => {
     console.log('Signing up user:', email);
     
+    const redirectUrl = `${window.location.origin}/`;
+    
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
+        emailRedirectTo: redirectUrl,
         data: {
           full_name: fullName || ''
         }
@@ -149,9 +152,35 @@ export const useAuth = () => {
   const updateProfile = async (updates: Partial<Profile>) => {
     if (!user) return { error: new Error('Usuário não autenticado') };
 
+    // Security: Only allow updating safe fields, prevent privilege escalation
+    const safeUpdates: Partial<Profile> = {};
+    const allowedFields = ['full_name', 'phone'] as const;
+    
+    for (const field of allowedFields) {
+      if (field in updates && updates[field] !== undefined) {
+        // Input validation
+        if (field === 'full_name' && updates[field]) {
+          if (typeof updates[field] !== 'string' || updates[field]!.length > 100) {
+            return { error: new Error('Nome deve ter no máximo 100 caracteres') };
+          }
+        }
+        if (field === 'phone' && updates[field]) {
+          const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+          if (typeof updates[field] !== 'string' || !phoneRegex.test(updates[field]!)) {
+            return { error: new Error('Formato de telefone inválido') };
+          }
+        }
+        safeUpdates[field] = updates[field];
+      }
+    }
+
+    if (Object.keys(safeUpdates).length === 0) {
+      return { error: new Error('Nenhum campo válido para atualizar') };
+    }
+
     const { data, error } = await supabase
       .from('profiles')
-      .update(updates)
+      .update(safeUpdates)
       .eq('id', user.id)
       .select()
       .single();
@@ -159,6 +188,21 @@ export const useAuth = () => {
     if (data && !error) {
       setProfile(data);
     }
+
+    return { data, error };
+  };
+
+  const updateUserRole = async (userId: string, role: string) => {
+    if (!user || !isAdmin) {
+      return { error: new Error('Acesso negado: apenas administradores podem alterar roles') };
+    }
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ role })
+      .eq('id', userId)
+      .select()
+      .single();
 
     return { data, error };
   };
@@ -182,6 +226,7 @@ export const useAuth = () => {
     signUp,
     signOut,
     updateProfile,
+    updateUserRole,
     isAdmin,
     isActive
   };
