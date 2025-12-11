@@ -1,4 +1,16 @@
-
+/**
+ * ProtectedRoute - Client-side access control wrapper
+ * 
+ * SECURITY NOTE: This component provides UI-level access control ONLY.
+ * It is NOT the primary security boundary.
+ * 
+ * Actual data protection is enforced by Supabase Row Level Security (RLS) policies:
+ * - Products table: Admin-only INSERT/UPDATE/DELETE via RLS policies
+ * - Profiles table: User can only modify own profile; admin role changes require admin RLS check
+ * 
+ * This component should be used for UX purposes (hiding admin UI from non-admins),
+ * NOT as a security measure. Even if this check is bypassed, RLS prevents unauthorized data access.
+ */
 import React from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { AdminLoadingScreen } from '@/components/admin/AdminLoadingScreen';
